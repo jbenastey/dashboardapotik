@@ -33,6 +33,7 @@ class TransaksiController extends CI_Controller
 			$debet = $this->input->post('debet');
 			$kredit = $this->input->post('kredit');
 			$biaya = $this->input->post('biaya');
+			$kategori = $this->input->post('kategori');
 			$data = array(
 				'tgl_transaksi' => $tgl,
 				'jenis_transaksi' => $jenis_transaksi,
@@ -41,6 +42,7 @@ class TransaksiController extends CI_Controller
 				'debet' => $debet,
 				'kredit' => $kredit,
 				'biaya' => $biaya,
+				'kategori' => $kategori,
 			);
 			$save = $this->Transaksi_model->tambah_transaksi($data);
 			if ($save > 0) {
@@ -67,9 +69,10 @@ class TransaksiController extends CI_Controller
 			$debet = $this->input->post('debet');
 			$kredit = $this->input->post('kredit');
 			$biaya = $this->input->post('biaya');
+			$kategori = $this->input->post('kategori');
 
 			$data = array(
-
+				'kategori' => $kategori,
 				'jenis_transaksi' => $jenis_transaksi,
 				'nama_obat' => $nama_obat,
 				'tempat_obat' => $tempat_obat,

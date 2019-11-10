@@ -19,6 +19,7 @@
                     <th>debet</th>
                     <th>kredit</th>
                     <th>biaya</th>
+                    <th>kategori</th>
                     <th>Aksi</th>
                     
                   </tr>
@@ -48,6 +49,9 @@
                       </td>
                       <td>
                         <?php echo $value['biaya'] ?>
+                      </td>
+                      <td>
+                        <?php echo $value['kategori'] ?>
                       </td>
                       <td>
                         <a href="<?php echo base_url('transaksi/edit/').$value ['id_transaksi']?>" class="btn btn-success"><i class="fa fa-pencil"></i></a>
