@@ -62,4 +62,13 @@ class Transaksi_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+
+	public function transaksi_kategori($kategori,$tahun){
+		$this->db->select('*');
+		$this->db->from('transaksi');
+		$this->db->where('kategori',$kategori);
+		$this->db->like('tgl_transaksi',$tahun);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 }

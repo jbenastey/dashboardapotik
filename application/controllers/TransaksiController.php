@@ -116,123 +116,99 @@ class TransaksiController extends CI_Controller
 	{
 		$transaksi = $this->Transaksi_model->lihat_transaksi_tahun($tahun);
 
-		$_2015 = 0;
-		$penjualan = 0;
-		$koreksi = 0;
-		$pembelian = 0;
-		$koreksi = 0;
-		$mutasi = 0;
+		$lain_total = 0;
+		$lain_penjualan = 0;
+		$lain_koreksi = 0;
+		$lain_pembelian = 0;
+		$lain_sedia = 0;
+		$lain_mutasi = 0;
+
+		$askes_total = 0;
+		$askes_penjualan = 0;
+		$askes_koreksi = 0;
+		$askes_pembelian = 0;
+		$askes_sedia = 0;
+		$askes_mutasi = 0;
+
+		$non_total = 0;
+		$non_penjualan = 0;
+		$non_koreksi = 0;
+		$non_pembelian = 0;
+		$non_sedia = 0;
+		$non_mutasi = 0;
 
 		foreach ($transaksi as $value) {
-			$tgl = explode(' ', $value['tgl_transaksi']);
-			$tahun = explode('-', $tgl[0]);
-			if ($tahun[0] == '2015') {
-				$_2015 = $_2015 + 1;
+			if ($value['kategori'] == 'LAINNYA') {
+				$lain_total++;
 				if ($value['jenis_transaksi'] == 'PENJUALAN') {
-					$penjualan_2015 = $penjualan_2015 + 1;
-				} elseif ($value['jenis_transaksi'] == 'KOREKSI PENJUALAN') {
-					$koreksi_penjualan_2015 = $koreksi_penjualan_2015 + 1;
+					$lain_penjualan++;
 				} elseif ($value['jenis_transaksi'] == 'PEMBELIAN') {
-					$pembelian_2015 = $pembelian_2015 + 1;
+					$lain_pembelian++;
 				} elseif ($value['jenis_transaksi'] == 'KOREKSI PERSEDIAAN') {
-					$koreksi_persediaan_2015 = $koreksi_persediaan_2015 + 1;
+					$lain_sedia++;
 				} elseif ($value['jenis_transaksi'] == 'MUTASI') {
-					$mutasi_2015 = $mutasi_2015 + 1;
+					$lain_mutasi++;
+				} elseif ($value['jenis_transaksi'] == 'KOREKSI PENJUALAN') {
+					$lain_koreksi++;
 				}
-			} elseif ($tahun[0] == '2016') {
-				$_2016 = $_2016 + 1;
+			}
+			if ($value['kategori'] == 'ASKES') {
+				$askes_total++;
 				if ($value['jenis_transaksi'] == 'PENJUALAN') {
-					$penjualan_2016 = $penjualan_2016 + 1;
-				} elseif ($value['jenis_transaksi'] == 'KOREKSI PENJUALAN') {
-					$koreksi_penjualan_2016 = $koreksi_penjualan_2016 + 1;
+					$askes_penjualan++;
 				} elseif ($value['jenis_transaksi'] == 'PEMBELIAN') {
-					$pembelian_2016 = $pembelian_2016 + 1;
+					$askes_pembelian++;
 				} elseif ($value['jenis_transaksi'] == 'KOREKSI PERSEDIAAN') {
-					$koreksi_persediaan_2016 = $koreksi_persediaan_2016 + 1;
+					$askes_sedia++;
 				} elseif ($value['jenis_transaksi'] == 'MUTASI') {
-					$mutasi_2016 = $mutasi_2016 + 1;
+					$askes_mutasi++;
+				} elseif ($value['jenis_transaksi'] == 'KOREKSI PENJUALAN') {
+					$askes_koreksi++;
 				}
-			} elseif ($tahun[0] == '2017') {
-				$_2017 = $_2017 + 1;
+			}
+			if ($value['kategori'] == 'NONASKES') {
+				$non_total++;
 				if ($value['jenis_transaksi'] == 'PENJUALAN') {
-					$penjualan_2017 = $penjualan_2017 + 1;
-				} elseif ($value['jenis_transaksi'] == 'KOREKSI PENJUALAN') {
-					$koreksi_penjualan_2017 = $koreksi_penjualan_2017 + 1;
+					$non_penjualan++;
 				} elseif ($value['jenis_transaksi'] == 'PEMBELIAN') {
-					$pembelian_2017 = $pembelian_2017 + 1;
+					$non_pembelian++;
 				} elseif ($value['jenis_transaksi'] == 'KOREKSI PERSEDIAAN') {
-					$koreksi_persediaan_2017 = $koreksi_persediaan_2017 + 1;
+					$non_sedia++;
 				} elseif ($value['jenis_transaksi'] == 'MUTASI') {
-					$mutasi_2017 = $mutasi_2017 + 1;
-				}
-			} elseif ($tahun[0] == '2018') {
-				$_2018 = $_2018 + 1;
-				if ($value['jenis_transaksi'] == 'PENJUALAN') {
-					$penjualan_2018 = $penjualan_2018 + 1;
+					$non_mutasi++;
 				} elseif ($value['jenis_transaksi'] == 'KOREKSI PENJUALAN') {
-					$koreksi_penjualan_2018 = $koreksi_penjualan_2018 + 1;
-				} elseif ($value['jenis_transaksi'] == 'PEMBELIAN') {
-					$pembelian_2018 = $pembelian_2018 + 1;
-				} elseif ($value['jenis_transaksi'] == 'KOREKSI PERSEDIAAN') {
-					$koreksi_persediaan_2018 = $koreksi_persediaan_2018 + 1;
-				} elseif ($value['jenis_transaksi'] == 'MUTASI') {
-					$mutasi_2018 = $mutasi_2018 + 1;
-				}
-			} elseif ($tahun[0] == '2019') {
-				$_2019 = $_2019 + 1;
-				if ($value['jenis_transaksi'] == 'PENJUALAN') {
-					$penjualan_2019 = $penjualan_2019 + 1;
-				} elseif ($value['jenis_transaksi'] == 'KOREKSI PENJUALAN') {
-					$koreksi_penjualan_2019 = $koreksi_penjualan_2019 + 1;
-				} elseif ($value['jenis_transaksi'] == 'PEMBELIAN') {
-					$pembelian_2019 = $pembelian_2019 + 1;
-				} elseif ($value['jenis_transaksi'] == 'KOREKSI PERSEDIAAN') {
-					$koreksi_persediaan_2019 = $koreksi_persediaan_2019 + 1;
-				} elseif ($value['jenis_transaksi'] == 'MUTASI') {
-					$mutasi_2019 = $mutasi_2019 + 1;
+					$non_koreksi++;
 				}
 			}
 		}
+
 		$data = array(
-			'tahun2015' => $_2015,
-			'penjualan_2015' => $penjualan_2015,
-			'koreksi_penjualan_2015' => $koreksi_penjualan_2015,
-			'pembelian_2015' => $pembelian_2015,
-			'koreksi_persediaan_2015' => $koreksi_persediaan_2015,
-			'mutasi_2015' => $mutasi_2015,
+			'lain_total' => $lain_total,
+			'lain_penjualan' => $lain_penjualan,
+			'lain_koreksi' => $lain_koreksi,
+			'lain_pembelian' => $lain_pembelian,
+			'lain_sedia' => $lain_sedia,
+			'lain_mutasi' => $lain_mutasi,
 
-			'tahun2016' => $_2016,
-			'penjualan_2016' => $penjualan_2016,
-			'koreksi_penjualan_2016' => $koreksi_penjualan_2016,
-			'pembelian_2016' => $pembelian_2016,
-			'koreksi_persediaan_2016' => $koreksi_persediaan_2016,
-			'mutasi_2016' => $mutasi_2016,
+			'askes_total' => $askes_total,
+			'askes_penjualan' => $askes_penjualan,
+			'askes_koreksi' => $askes_koreksi,
+			'askes_pembelian' => $askes_pembelian,
+			'askes_sedia' => $askes_sedia,
+			'askes_mutasi' => $askes_mutasi,
 
-			'tahun2017' => $_2017,
-			'penjualan_2017' => $penjualan_2017,
-			'koreksi_penjualan_2017' => $koreksi_penjualan_2017,
-			'pembelian_2017' => $pembelian_2017,
-			'koreksi_persediaan_2017' => $koreksi_persediaan_2017,
-			'mutasi_2017' => $mutasi_2017,
-
-			'tahun2018' => $_2018,
-			'penjualan_2018' => $penjualan_2018,
-			'koreksi_penjualan_2018' => $koreksi_penjualan_2018,
-			'pembelian_2018' => $pembelian_2018,
-			'koreksi_persediaan_2018' => $koreksi_persediaan_2018,
-			'mutasi_2018' => $mutasi_2018,
-
-			'tahun2019' => $_2019,
-			'penjualan_2019' => $penjualan_2019,
-			'koreksi_penjualan_2019' => $koreksi_penjualan_2019,
-			'pembelian_2019' => $pembelian_2019,
-			'koreksi_persediaan_2019' => $koreksi_persediaan_2019,
-			'mutasi_2019' => $mutasi_2019
+			'non_total' => $non_total,
+			'non_penjualan' => $non_penjualan,
+			'non_koreksi' => $non_koreksi,
+			'non_pembelian' => $non_pembelian,
+			'non_sedia' => $non_sedia,
+			'non_mutasi' => $non_mutasi,
 		);
 		echo json_encode($data);
 	}
 
-	public function grafik_tahun(){
+	public function grafik_tahun()
+	{
 		$obat = array(
 			'data2015' => count($this->Transaksi_model->transaksi_tahun('2015')),
 			'data2016' => count($this->Transaksi_model->transaksi_tahun('2016')),
@@ -242,5 +218,10 @@ class TransaksiController extends CI_Controller
 			'data2020' => count($this->Transaksi_model->transaksi_tahun('2020')),
 		);
 		echo json_encode($obat);
+	}
+
+	public function grafik_kategori($kategori,$tahun){
+		$transaksi = $this->Transaksi_model->transaksi_kategori($kategori,$tahun);
+		echo json_encode($transaksi);
 	}
 }

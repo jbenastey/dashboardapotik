@@ -187,7 +187,7 @@ $(document).ready(function () {
 								var series = element[0]._model.datasetLabel;
 								var label = element[0]._model.label;
 								var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
-								obat_kategori(label);
+								obat_kategori(label,tahun);
 							}
 						},
 						maintainAspectRatio: false,
@@ -256,11 +256,11 @@ $(document).ready(function () {
 		})
 	}
 
-	function obat_kategori(label) {
-		// console.log(label);
+	function obat_kategori(label,tahun) {
+		console.log(tahun);
 		var html2 = '';
 		$.ajax({
-			url: root + 'obat/grafik-kategori/'+label,
+			url: root + 'obat/grafik-kategori/'+label+'/'+tahun,
 			type: 'GET',
 			async: true,
 			cache: false,
@@ -324,6 +324,13 @@ $(document).ready(function () {
 							display: true,
 							position: 'bottom',
 						},
+						scales: {
+							xAxes:[{
+								ticks: {
+									beginAtZero : true
+								}
+							}]
+						}
 					}
 				});
 			}

@@ -60,7 +60,7 @@ $route['obat/edit/(:any)'] = 'ObatController/edit/$1';
 $route['obat/delete/(:any)'] = 'ObatController/delete/$1';
 $route['obat/grafik'] = 'ObatController/grafik';
 $route['obat/data-grafik/(:any)'] = 'ObatController/datagrafik/$1';
-$route['obat/grafik-kategori/(:any)'] = 'ObatController/grafik_kategori/$1';
+$route['obat/grafik-kategori/(:any)/(:any)'] = 'ObatController/grafik_kategori/$1/$2';
 $route['obat/grafik-tahun'] = 'ObatController/grafik_tahun';
 
 $route['transaksi'] = 'TransaksiController/index';
@@ -68,8 +68,9 @@ $route['transaksi/create'] = 'TransaksiController/create';
 $route['transaksi/grafik'] = 'TransaksiController/grafik';
 $route['transaksi/edit/(:any)'] = 'TransaksiController/edit/$1';
 $route['transaksi/delete/(:any)'] = 'TransaksiController/delete/$1';
-$route['transaksi/data-grafik'] = 'TransaksiController/datagrafik';
+$route['transaksi/data-grafik/(:any)'] = 'TransaksiController/datagrafik/$1';
 $route['transaksi/grafik-tahun'] = 'TransaksiController/grafik_tahun';
+$route['transaksi/grafik-kategori/(:any)/(:any)'] = 'TransaksiController/grafik_kategori/$1/$2';
 
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';

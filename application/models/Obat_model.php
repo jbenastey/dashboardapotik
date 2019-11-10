@@ -86,10 +86,11 @@ class Obat_model extends CI_Model
 		$this->db->insert_batch('obat', $data);
 	}
 
-	public function obat_kategori($kategori){
+	public function obat_kategori($kategori,$tahun){
 		$this->db->select('*');
 		$this->db->from('obat');
 		$this->db->where('bentuk_obat',$kategori);
+		$this->db->like('tgl_update',$tahun);
 		$query = $this->db->get();
 		return $query->result_array();
 	}
