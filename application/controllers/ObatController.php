@@ -1,4 +1,6 @@
 <?php
+require FCPATH.'vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Reader;
 
 class ObatController extends CI_Controller
 {
@@ -63,6 +65,52 @@ class ObatController extends CI_Controller
 		$this->load->view('template/header');
 		$this->load->view('obat/create');
 		$this->load->view('template/footer');
+	}
+
+	public function import()
+	{
+		if (isset($_POST['simpan'])) {
+			$upload = $this->Obat_model->upload_excel('import');
+			if ($upload['result'] == 'success'){
+				$reader = new Reader\Xlsx();
+				$spreadsheet = $reader->load(FCPATH.'excel/import/'.$upload['file']['file_name']);
+				$sheet = $spreadsheet->getActiveSheet()->toArray(null, true, true ,true);
+//				var_dump($sheet);
+				$data = array();
+
+				$numrow = 1;
+				foreach($sheet as $row){
+					// Cek $numrow apakah lebih dari 1
+					// Artinya karena baris pertama adalah nama-nama kolom
+					// Jadi dilewat saja, tidak usah diimport
+					if($numrow > 1){
+						// Kita push (add) array data ke variabel data
+						array_push($data, array(
+							'kode_obat'=>$row['A'], // Insert data nis dari kolom A di excel
+							'jenis_obat'=>$row['B'], // Insert data nama dari kolom B di excel
+							'nama_obat'=>$row['C'], // Insert data jenis kelamin dari kolom C di excel
+							'bentuk_obat'=>$row['D'], // Insert data alamat dari kolom D di excel
+							'golongan_obat'=>$row['E'], // Insert data alamat dari kolom D di excel
+							'kelompok_obat'=>$row['F'], // Insert data alamat dari kolom D di excel
+							'harga_pembelian'=>$row['G'], // Insert data alamat dari kolom D di excel
+							'persediaan_obat'=>$row['H'], // Insert data alamat dari kolom D di excel
+							'produsen_obat'=>$row['I'], // Insert data alamat dari kolom D di excel
+							'tgl_update'=>$row['J'], // Insert data alamat dari kolom D di excel
+							'tgl_expired'=>$row['K'], // Insert data alamat dari kolom D di excel
+						));
+					}
+
+					$numrow++; // Tambah 1 setiap kali looping
+				}
+				$this->Obat_model->insert_multiple($data);
+				redirect('obat');
+			}
+
+		} else {
+			$this->load->view('template/header');
+			$this->load->view('obat/import');
+			$this->load->view('template/footer');
+		}
 	}
 
 	public function edit($code)
@@ -212,7 +260,8 @@ class ObatController extends CI_Controller
 
 	}
 
-	public function grafik_tahun(){
+	public function grafik_tahun()
+	{
 		$obat = array(
 			'data2015' => count($this->Obat_model->obat_tahun('2015')),
 			'data2016' => count($this->Obat_model->obat_tahun('2016')),

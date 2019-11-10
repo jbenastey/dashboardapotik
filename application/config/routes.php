@@ -49,22 +49,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['obat'] = 'ObatController/index';
-$route['transaksi'] = 'TransaksiController/index';
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['transaksi/create'] = 'TransaksiController/create';
+
+$route['obat'] = 'ObatController/index';
 $route['obat/create'] = 'ObatController/create';
+$route['obat/import'] = 'ObatController/import';
 $route['obat/edit/(:any)'] = 'ObatController/edit/$1';
 $route['obat/delete/(:any)'] = 'ObatController/delete/$1';
-$route['transaksi/edit/(:any)'] = 'TransaksiController/edit/$1';
-$route['transaksi/delete/(:any)'] = 'TransaksiController/delete/$1';
 $route['obat/grafik'] = 'ObatController/grafik';
-$route['transaksi/grafik'] = 'TransaksiController/grafik';
 $route['obat/data-grafik/(:any)'] = 'ObatController/datagrafik/$1';
 $route['obat/grafik-tahun'] = 'ObatController/grafik_tahun';
+
+$route['transaksi'] = 'TransaksiController/index';
+$route['transaksi/create'] = 'TransaksiController/create';
+$route['transaksi/grafik'] = 'TransaksiController/grafik';
+$route['transaksi/edit/(:any)'] = 'TransaksiController/edit/$1';
+$route['transaksi/delete/(:any)'] = 'TransaksiController/delete/$1';
 $route['transaksi/data-grafik'] = 'TransaksiController/datagrafik';
 $route['transaksi/grafik-tahun'] = 'TransaksiController/grafik_tahun';
+
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';

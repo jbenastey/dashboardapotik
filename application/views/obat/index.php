@@ -6,8 +6,9 @@
 					<div class="card-header">
 							<h3>Data Obat
 						<div class="float-right">
-							<a href="<?php echo base_url('obat/create') ?>" class="btn btn-primary">Tambah Data Obat</a>
-							<a href="<?php echo base_url('obat/grafik') ?>" class="btn btn-success">Lihat Grafik</a>
+							<a href="<?php echo base_url('obat/create') ?>" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah Data Obat</a>
+							<a href="<?php echo base_url('obat/import') ?>" class="btn btn-sm btn-success"><i class="fa fa-file-excel-o"></i> Import Data Obat</a>
+							<a href="<?php echo base_url('obat/grafik') ?>" class="btn btn-sm btn-secondary"><i class="fa fa-bar-chart"></i> Lihat Grafik</a>
 						</div>
 					</div>
 					<div class="card-body">
