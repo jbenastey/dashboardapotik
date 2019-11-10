@@ -4,8 +4,11 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<a href="<?php echo base_url('obat/create') ?>" class="btn btn-primary">tambah obat</a>
-						<a href="<?php echo base_url('obat/grafik') ?>" class="btn btn-primary">Lihat Grafik</a>
+							<h3>Data Obat
+						<div class="float-right">
+							<a href="<?php echo base_url('obat/create') ?>" class="btn btn-primary">Tambah Data Obat</a>
+							<a href="<?php echo base_url('obat/grafik') ?>" class="btn btn-success">Lihat Grafik</a>
+						</div>
 					</div>
 					<div class="card-body">
 						<table class="table table-bordered table-striped table-responsive" id="example1">
