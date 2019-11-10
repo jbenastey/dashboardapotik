@@ -65,5 +65,6 @@ $route['transaksi/grafik'] = 'TransaksiController/grafik';
 $route['obat/data-grafik/(:any)'] = 'ObatController/datagrafik/$1';
 $route['obat/grafik-tahun'] = 'ObatController/grafik_tahun';
 $route['transaksi/data-grafik'] = 'TransaksiController/datagrafik';
+$route['transaksi/grafik-tahun'] = 'TransaksiController/grafik_tahun';
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';
