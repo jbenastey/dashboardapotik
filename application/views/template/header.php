@@ -90,14 +90,14 @@ to get the desired effect
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?= base_url('obat')?>" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
+                <a href="<?= base_url('obat')?>" class="nav-link <?php if($this->uri->segment(1) == 'obat'){ echo 'active';} ?>">
+                  <i class="fa fa-medkit nav-icon"></i>
                   <p>OBAT</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('transaksi')?>" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
+                <a href="<?= base_url('transaksi')?>" class="nav-link <?php if($this->uri->segment(1) == 'transaksi'){ echo 'active';} ?>">
+                  <i class="fa fa-money nav-icon"></i>
                   <p>TRANSAKSI OBAT</p>
                 </a>
               </li>
