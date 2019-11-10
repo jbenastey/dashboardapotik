@@ -68,7 +68,7 @@ class Obat_model extends CI_Model
 		$config['upload_path'] = FCPATH.'/excel/import/';
 		$config['allowed_types'] = 'xlsx';
 		$config['max_size']  = '2048';
-		$config['overwrite'] = false;
+		$config['overwrite'] = true;
 
 		$this->upload->initialize($config); // Load konfigurasi uploadnya
 		if($this->upload->do_upload($file)){ // Lakukan upload dan Cek jika proses upload berhasil
