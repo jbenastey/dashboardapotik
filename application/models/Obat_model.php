@@ -85,4 +85,12 @@ class Obat_model extends CI_Model
 	public function insert_multiple($data){
 		$this->db->insert_batch('obat', $data);
 	}
+
+	public function obat_kategori($kategori){
+		$this->db->select('*');
+		$this->db->from('obat');
+		$this->db->where('bentuk_obat',$kategori);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 }

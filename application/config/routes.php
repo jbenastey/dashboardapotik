@@ -60,6 +60,7 @@ $route['obat/edit/(:any)'] = 'ObatController/edit/$1';
 $route['obat/delete/(:any)'] = 'ObatController/delete/$1';
 $route['obat/grafik'] = 'ObatController/grafik';
 $route['obat/data-grafik/(:any)'] = 'ObatController/datagrafik/$1';
+$route['obat/grafik-kategori/(:any)'] = 'ObatController/grafik_kategori/$1';
 $route['obat/grafik-tahun'] = 'ObatController/grafik_tahun';
 
 $route['transaksi'] = 'TransaksiController/index';

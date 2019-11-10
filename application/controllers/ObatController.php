@@ -272,4 +272,9 @@ class ObatController extends CI_Controller
 		);
 		echo json_encode($obat);
 	}
+
+	public function grafik_kategori($kategori){
+		$obat = $this->Obat_model->obat_kategori($kategori);
+		echo json_encode($obat);
+	}
 }
