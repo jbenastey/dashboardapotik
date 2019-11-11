@@ -1,5 +1,8 @@
 <?php
 
+require FCPATH.'vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Reader;
+
 class TransaksiController extends CI_Controller
 {
 
@@ -223,5 +226,47 @@ class TransaksiController extends CI_Controller
 	public function grafik_kategori($kategori,$tahun){
 		$transaksi = $this->Transaksi_model->transaksi_kategori($kategori,$tahun);
 		echo json_encode($transaksi);
+	}
+
+	public function import(){
+		if (isset($_POST['simpan'])) {
+			$upload = $this->Transaksi_model->upload_excel('import');
+			if ($upload['result'] == 'success'){
+				$reader = new Reader\Xlsx();
+				$spreadsheet = $reader->load(FCPATH.'excel/import/'.$upload['file']['file_name']);
+				$sheet = $spreadsheet->getActiveSheet()->toArray(null, true, true ,true);
+//				var_dump($sheet);
+				$data = array();
+
+				$numrow = 1;
+				foreach($sheet as $row){
+					// Cek $numrow apakah lebih dari 1
+					// Artinya karena baris pertama adalah nama-nama kolom
+					// Jadi dilewat saja, tidak usah diimport
+					if($numrow > 1){
+						// Kita push (add) array data ke variabel data
+						array_push($data, array(
+							'tgl_transaksi'=>$row['A'], // Insert data nis dari kolom A di excel
+							'jenis_transaksi'=>$row['B'], // Insert data nama dari kolom B di excel
+							'nama_obat'=>$row['C'], // Insert data jenis kelamin dari kolom C di excel
+							'tempat_obat'=>$row['D'], // Insert data alamat dari kolom D di excel
+							'kategori'=>$row['E'], // Insert data alamat dari kolom D di excel
+							'debet'=>$row['F'], // Insert data alamat dari kolom D di excel
+							'kredit'=>$row['G'], // Insert data alamat dari kolom D di excel
+							'biaya'=>$row['H'], // Insert data alamat dari kolom D di excel
+						));
+					}
+
+					$numrow++; // Tambah 1 setiap kali looping
+				}
+				$this->Transaksi_model->insert_multiple($data);
+				redirect('transaksi');
+			}
+
+		} else {
+			$this->load->view('template/header');
+			$this->load->view('transaksi/import');
+			$this->load->view('template/footer');
+		}
 	}
 }
