@@ -277,4 +277,50 @@ class ObatController extends CI_Controller
 		$obat = $this->Obat_model->obat_kategori($kategori,$tahun);
 		echo json_encode($obat);
 	}
+
+	public function grafik_bulan($tahun){
+		$obat = $this->Obat_model->obat_bulan($tahun);
+		$data = array(
+			'jan' => array(),
+			'feb' => array(),
+			'mar' => array(),
+			'apr' => array(),
+			'mei' => array(),
+			'jun' => array(),
+			'jul' => array(),
+			'agu' => array(),
+			'sep' => array(),
+			'okt' => array(),
+			'nov' => array(),
+			'des' => array(),
+		);
+		foreach ($obat as $key=>$value) {
+			if (strpos($value['tgl_update'],'-01-') == true){
+				array_push($data['jan'],$value);
+			}elseif (strpos($value['tgl_update'],'-02-') == true){
+				array_push($data['feb'],$value);
+			}elseif (strpos($value['tgl_update'],'-03-') == true){
+				array_push($data['mar'],$value);
+			}elseif (strpos($value['tgl_update'],'-04-') == true){
+				array_push($data['apr'],$value);
+			}elseif (strpos($value['tgl_update'],'-05-') == true){
+				array_push($data['mei'],$value);
+			}elseif (strpos($value['tgl_update'],'-06-') == true){
+				array_push($data['jun'],$value);
+			}elseif (strpos($value['tgl_update'],'-07-') == true){
+				array_push($data['jul'],$value);
+			}elseif (strpos($value['tgl_update'],'-08-') == true){
+				array_push($data['agu'],$value);
+			}elseif (strpos($value['tgl_update'],'-09-') == true){
+				array_push($data['sep'],$value);
+			}elseif (strpos($value['tgl_update'],'-10-') == true){
+				array_push($data['okt'],$value);
+			}elseif (strpos($value['tgl_update'],'-11-') == true){
+				array_push($data['nov'],$value);
+			}elseif (strpos($value['tgl_update'],'-12-') == true){
+				array_push($data['des'],$value);
+			}
+		}
+		echo json_encode($data);
+	}
 }

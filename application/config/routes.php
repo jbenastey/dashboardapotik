@@ -62,6 +62,7 @@ $route['obat/grafik'] = 'ObatController/grafik';
 $route['obat/data-grafik/(:any)'] = 'ObatController/datagrafik/$1';
 $route['obat/grafik-kategori/(:any)/(:any)'] = 'ObatController/grafik_kategori/$1/$2';
 $route['obat/grafik-tahun'] = 'ObatController/grafik_tahun';
+$route['obat/grafik-bulan/(:any)'] = 'ObatController/grafik_bulan/$1';
 
 $route['transaksi'] = 'TransaksiController/index';
 $route['transaksi/create'] = 'TransaksiController/create';

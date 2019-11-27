@@ -17,6 +17,10 @@
 							<canvas id="obat-chart" width="1000" height="280"></canvas>
 						</div>
 						<hr>
+						<div id="detail3">
+
+						</div>
+						<hr>
 						<div id="detail">
 
 						</div>

@@ -94,4 +94,12 @@ class Obat_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+
+	public function obat_bulan($tahun){
+		$this->db->select('*');
+		$this->db->from('obat');
+		$this->db->like('tgl_update',$tahun);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 }
