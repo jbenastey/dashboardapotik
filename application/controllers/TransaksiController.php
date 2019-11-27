@@ -269,4 +269,13 @@ class TransaksiController extends CI_Controller
 			$this->load->view('template/footer');
 		}
 	}
+
+	public function lihat($id){
+		$data = array(
+			'transaksi' => $this->Transaksi_model->lihat_satutransaksi($id)
+		);
+		$this->load->view('template/header');
+		$this->load->view('transaksi/lihat',$data);
+		$this->load->view('template/footer');
+	}
 }

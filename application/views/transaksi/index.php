@@ -63,6 +63,8 @@
 										<?php echo $value['kategori'] ?>
 									</td>
 									<td>
+										<a href="<?php echo base_url('transaksi/lihat/') . $value ['id_transaksi'] ?>"
+										   class="btn btn-primary"><i class="fa fa-eye"></i></a><br>
 										<a href="<?php echo base_url('transaksi/edit/') . $value ['id_transaksi'] ?>"
 										   class="btn btn-success"><i class="fa fa-pencil"></i></a>
 										<a href="<?php echo base_url('transaksi/delete/') . $value ['id_transaksi'] ?>"
