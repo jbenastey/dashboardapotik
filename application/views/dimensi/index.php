@@ -17,11 +17,12 @@
 					<div class="card-header">
 						<a href="<?= base_url('refresh') ?>" class="btn btn-outline-primary btn-sm float-right"><i class="fa fa-refresh"></i> Refresh</a>
 						<ul class="nav nav-pills ml-auto">
-							<li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">dim_anggota</a></li>
-							<li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">dim_buku</a></li>
-							<li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">dim_peminjam</a></li>
-							<li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab">dim_pengunjung</a></li>
-							<li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab">dim_waktu</a></li>
+							<li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">dim_kategori</a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">dim_golongan</a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">dim_obat</a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab">dim_penjual</a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab">dim_produsen</a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab">dim_waktu</a></li>
 						</ul>
 					</div><!-- /.card-header -->
 					<div class="card-body">
@@ -30,19 +31,17 @@
 								<table class="table table-bordered table-striped example1">
 									<thead class="text-center">
 									<tr>
-										<th>id_anggota</th>
-										<th>nama_anggota</th>
-										<th>nomor_anggota</th>
+										<th>kategori_id</th>
+										<th>kategori_nama</th>
 									</tr>
 									</thead>
 									<tbody>
 									<?php
-									foreach($anggota as $key=>$value):
+									foreach($kategori as $key=>$value):
 									?>
 									<tr>
-										<td><?= $value['id_anggota'] ?></td>
-										<td><?= $value['nama_anggota'] ?></td>
-										<td><?= $value['nomor_anggota'] ?></td>
+										<td><?= $value['kategori_id'] ?></td>
+										<td><?= $value['kategori_nama'] ?></td>
 									</tr>
 									<?php
 									endforeach;
@@ -53,21 +52,19 @@
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_2">
 								<table class="table table-bordered table-striped example1">
-									<thead>
+									<thead class="text-center">
 									<tr>
-										<th>id_buku</th>
-										<th>kode_buku</th>
-										<th>judul_buku</th>
+										<th>golongan_id</th>
+										<th>golongan_nama</th>
 									</tr>
 									</thead>
 									<tbody>
 									<?php
-									foreach($buku as $key=>$value):
+									foreach($golongan as $key=>$value):
 										?>
 										<tr>
-											<td><?= $value['id_buku'] ?></td>
-											<td><?= $value['kode_buku'] ?></td>
-											<td><?= $value['judul_buku'] ?></td>
+											<td><?= $value['golongan_id'] ?></td>
+											<td><?= $value['golongan_nama'] ?></td>
 										</tr>
 									<?php
 									endforeach;
@@ -80,19 +77,19 @@
 								<table class="table table-bordered table-striped example1">
 									<thead class="text-center">
 									<tr>
-										<th>id_peminjam</th>
-										<th>nama_peminjam</th>
-										<th>nomor_anggota</th>
+										<th>obat_id</th>
+										<th>obat_kode</th>
+										<th>obat_nama</th>
 									</tr>
 									</thead>
 									<tbody>
 									<?php
-									foreach($peminjam as $key=>$value):
+									foreach($obat as $key=>$value):
 										?>
 										<tr>
-											<td><?= $value['id_peminjam'] ?></td>
-											<td><?= $value['nama_peminjam'] ?></td>
-											<td><?= $value['nomor_anggota'] ?></td>
+											<td><?= $value['obat_id'] ?></td>
+											<td><?= $value['obat_kode'] ?></td>
+											<td><?= $value['obat_nama'] ?></td>
 										</tr>
 									<?php
 									endforeach;
@@ -105,19 +102,17 @@
 								<table class="table table-bordered table-striped example1">
 									<thead class="text-center">
 									<tr>
-										<th>id_pengunjung</th>
-										<th>nama_pengunjung</th>
-										<th>nik_pengunjung</th>
+										<th>penjual_id</th>
+										<th>penjual_tempat</th>
 									</tr>
 									</thead>
 									<tbody>
 									<?php
-									foreach($pengunjung as $key=>$value):
+									foreach($penjual as $key=>$value):
 										?>
 										<tr>
-											<td><?= $value['id_pengunjung'] ?></td>
-											<td><?= $value['nama_pengunjung'] ?></td>
-											<td><?= $value['nik_pengunjung'] ?></td>
+											<td><?= $value['penjual_id'] ?></td>
+											<td><?= $value['penjual_tempat'] ?></td>
 										</tr>
 									<?php
 									endforeach;
@@ -130,11 +125,34 @@
 								<table class="table table-bordered table-striped example1">
 									<thead class="text-center">
 									<tr>
-										<th>id_waktu</th>
+										<th>produsen_id</th>
+										<th>produsen_nama</th>
+									</tr>
+									</thead>
+									<tbody>
+									<?php
+									foreach($produsen as $key=>$value):
+										?>
+										<tr>
+											<td><?= $value['produsen_id'] ?></td>
+											<td><?= $value['produsen_nama'] ?></td>
+										</tr>
+									<?php
+									endforeach;
+									?>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.tab-pane -->
+							<div class="tab-pane" id="tab_6">
+								<table class="table table-bordered table-striped example1">
+									<thead class="text-center">
+									<tr>
+										<th>waktu_id</th>
 										<th>waktu</th>
-										<th>hari_waktu</th>
-										<th>bulan_waktu</th>
-										<th>tahun_waktu</th>
+										<th>waktu_hari</th>
+										<th>waktu_bulan</th>
+										<th>waktu_tahun</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -142,11 +160,11 @@
 									foreach($waktu as $key=>$value):
 										?>
 										<tr>
-											<td><?= $value['id_waktu'] ?></td>
+											<td><?= $value['waktu_id'] ?></td>
 											<td><?= $value['waktu'] ?></td>
-											<td><?= $value['hari_waktu'] ?></td>
-											<td><?= $value['bulan_waktu'] ?></td>
-											<td><?= $value['tahun_waktu'] ?></td>
+											<td><?= $value['waktu_hari'] ?></td>
+											<td><?= $value['waktu_bulan'] ?></td>
+											<td><?= $value['waktu_tahun'] ?></td>
 										</tr>
 									<?php
 									endforeach;
