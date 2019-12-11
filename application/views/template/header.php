@@ -80,29 +80,30 @@ to get the desired effect
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fa fa-dashboard"></i>
-              <p>
-                Dashboard
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?= base_url('obat')?>" class="nav-link <?php if($this->uri->segment(1) == 'obat'){ echo 'active';} ?>">
-                  <i class="fa fa-medkit nav-icon"></i>
-                  <p>OBAT</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?= base_url('transaksi')?>" class="nav-link <?php if($this->uri->segment(1) == 'transaksi'){ echo 'active';} ?>">
-                  <i class="fa fa-money nav-icon"></i>
-                  <p>TRANSAKSI OBAT</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          <li class="nav-item">
+				<a href="<?=base_url()?>" class="nav-link <?php if ($this->uri->segment('1') == null) echo 'active'?>">
+					<i class="nav-icon fa fa-home"></i>
+					<p class="text">Beranda</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="<?=base_url('mentah')?>" class="nav-link <?php if ($this->uri->segment(1) == 'mentah') echo 'active'?>">
+					<i class="nav-icon fa fa-file-excel-o"></i>
+					<p class="text">Data Excel</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="<?=base_url('dimensi')?>" class="nav-link <?php if ($this->uri->segment('1') == 'dimensi') echo 'active'?>">
+					<i class="nav-icon fa fa-file-o"></i>
+					<p>Tabel Dimensi</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="<?=base_url('fakta')?>" class="nav-link <?php if ($this->uri->segment('1') == 'fakta') echo 'active'?>">
+					<i class="nav-icon fa fa-file"></i>
+					<p>Tabel Fakta</p>
+				</a>
+			</li>
           
         </ul>
       </nav>

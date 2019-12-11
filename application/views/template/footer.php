@@ -37,17 +37,9 @@
 <script src="<?= base_url ('assets/js/grafik/obat.js') ?>"></script>
 <script src="<?= base_url ('assets/js/grafik/transaksi.js') ?>"></script>
 <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
+	$(function () {
+		$('table.example1').DataTable();
+	});
 </script>
 </body>
 </html>

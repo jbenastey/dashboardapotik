@@ -75,5 +75,14 @@ $route['transaksi/data-grafik/(:any)'] = 'TransaksiController/datagrafik/$1';
 $route['transaksi/grafik-tahun'] = 'TransaksiController/grafik_tahun';
 $route['transaksi/grafik-kategori/(:any)/(:any)'] = 'TransaksiController/grafik_kategori/$1/$2';
 
+
+$route['upload'] = 'ProsesController/upload';
+$route['mentah'] = 'ProsesController/excel';
+$route['dimensi'] = 'ProsesController/dimensi';
+$route['refresh'] = 'ProsesController/refresh';
+$route['fakta'] = 'ProsesController/fakta';
+$route['refresh_fakta'] = 'ProsesController/refreshFakta';
+$route['banyak'] = 'ProsesController/terbanyak';
+
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';
