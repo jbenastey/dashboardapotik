@@ -351,55 +351,58 @@ class ProsesController extends CI_Controller
 
 	public function fakta(){
 		$data = array(
-			'fakta' => $this->proses->lihat('fact_peminjaman')
+			'fakta' => $this->proses->lihat('fact_penjualan')
 		);
-		$this->load->view('templates/header');
+		$this->load->view('template/header');
 		$this->load->view('fakta/index', $data);
-		$this->load->view('templates/footer');
+		$this->load->view('template/footer');
 	}
 
 	public function refreshFakta(){
-		$data = $this->proses->lihat('fact_peminjaman');
+		$data = $this->proses->lihat('fact_penjualan');
 
 		$dataDimensi = array(
-			'anggota' => $this->proses->lihat('dim_anggota'),
-			'buku' => $this->proses->lihat('dim_buku'),
-			'peminjam' => $this->proses->lihat('dim_peminjam'),
-			'pengunjung' => $this->proses->lihat('dim_pengunjung'),
+			'golongan' => $this->proses->lihat('dim_golongan'),
+			'kategori' => $this->proses->lihat('dim_kategori'),
+			'obat' => $this->proses->lihat('dim_obat'),
+			'penjual' => $this->proses->lihat('dim_penjual'),
+			'produsen' => $this->proses->lihat('dim_produsen'),
 			'waktu' => $this->proses->lihat('dim_waktu'),
 		);
 
 		$dataFakta = array();
 
 		if (count($data) == 0){
-			foreach ($dataDimensi['anggota'] as $key=>$value) {
+			foreach ($dataDimensi['golongan'] as $key=>$value) {
 				array_push($dataFakta, array(
-					'id_anggota' => $value['id_anggota'],
-					'id_peminjam' => $dataDimensi['peminjam'][$key]['id_peminjam'],
-					'id_pengunjung' => $dataDimensi['pengunjung'][$key]['id_pengunjung'],
-					'id_buku' => $dataDimensi['buku'][$key]['id_buku'],
-					'id_waktu' => $dataDimensi['waktu'][$key]['id_waktu'],
+					'id_golongan' => $value['golongan_id'],
+					'id_kategori' => $dataDimensi['kategori'][$key]['kategori_id'],
+					'id_obat' => $dataDimensi['obat'][$key]['obat_id'],
+					'id_penjual' => $dataDimensi['penjual'][$key]['penjual_id'],
+					'id_produsen' => $dataDimensi['produsen'][$key]['produsen_id'],
+					'id_waktu' => $dataDimensi['waktu'][$key]['waktu_id'],
 				));
 			}
-			$this->proses->insert_dimensi('fact_peminjaman', $dataFakta);
-		} elseif (count($data) == count($dataDimensi['anggota'])) {
+			$this->proses->insert_dimensi('fact_penjualan', $dataFakta);
+		} elseif (count($data) == count($dataDimensi['golongan'])) {
 			$dataFakta = null;
 		} else {
 			foreach ($data as $key => $value) {
-				if ($value['id_anggota'] == $dataDimensi['anggota'][$key]['id_anggota']) {
+				if ($value['id_golongan'] == $dataDimensi['golongan'][$key]['golongan_id']) {
 					unset($data[$key]);
 				}
 			}
-			foreach ($dataDimensi['anggota'] as $key=>$value) {
+			foreach ($dataDimensi['golongan'] as $key=>$value) {
 				array_push($dataFakta, array(
-					'id_anggota' => $value['id_anggota'],
-					'id_peminjam' => $dataDimensi['peminjam'][$key]['id_peminjam'],
-					'id_pengunjung' => $dataDimensi['pengunjung'][$key]['id_pengunjung'],
-					'id_buku' => $dataDimensi['buku'][$key]['id_buku'],
-					'id_waktu' => $dataDimensi['waktu'][$key]['id_waktu'],
+					'id_golongan' => $value['golongan_id'],
+					'id_kategori' => $dataDimensi['kategori'][$key]['kategori_id'],
+					'id_obat' => $dataDimensi['obat'][$key]['obat_id'],
+					'id_penjual' => $dataDimensi['penjual'][$key]['penjual_id'],
+					'id_produsen' => $dataDimensi['produsen'][$key]['produsen_id'],
+					'id_waktu' => $dataDimensi['waktu'][$key]['waktu_id'],
 				));
 			}
-			$this->proses->insert_dimensi('fact_peminjaman', $dataFakta);
+			$this->proses->insert_dimensi('fact_penjualan', $dataFakta);
 		}
 //		echo "<pre>";
 //		print_r ($dataFakta);
