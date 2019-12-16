@@ -220,7 +220,7 @@ class ProsesController extends CI_Controller
 			$dataDimensi['golongan'] = null;
 		} else {
 			foreach ($dimensiLama['golongan'] as $key => $value) {
-				if ($value['golongan_id'] == $data['anggota'][$key]['golongan_id']) {
+				if ($value['golongan_id'] == $data['golongan'][$key]['golongan_id']) {
 					unset($data['golongan'][$key]);
 				}
 			}
@@ -389,7 +389,12 @@ class ProsesController extends CI_Controller
 		} else {
 			foreach ($data as $key => $value) {
 				if ($value['id_golongan'] == $dataDimensi['golongan'][$key]['golongan_id']) {
-					unset($data[$key]);
+					unset($dataDimensi['golongan'][$key]);
+					unset($dataDimensi['kategori'][$key]);
+					unset($dataDimensi['obat'][$key]);
+					unset($dataDimensi['penjual'][$key]);
+					unset($dataDimensi['produsen'][$key]);
+					unset($dataDimensi['waktu'][$key]);
 				}
 			}
 			foreach ($dataDimensi['golongan'] as $key=>$value) {
