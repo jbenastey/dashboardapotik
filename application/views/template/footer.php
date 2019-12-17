@@ -39,6 +39,9 @@
 <script>
 	$(function () {
 		$('table.example1').DataTable();
+		$('table.example2').DataTable({
+			paging: false
+		});
 	});
 </script>
 </body>
