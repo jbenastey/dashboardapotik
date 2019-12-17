@@ -76,20 +76,24 @@
 		</div>
 		<div class="row">
 			<div class="col-12">
-				<div class="chart">
-					<canvas id="transaksi-chart" width="1000" height="280"></canvas>
-				</div>
-				<hr>
-				<div class="chart">
-					<canvas id="transaksi-chart1" width="1000" height="280"></canvas>
-				</div>
-				<hr>
-				<div id="transaksi-detail">
+				<div class="card">
+					<div class="card-body">
+						<div class="chart">
+							<canvas id="transaksi-chart" width="1000" height="280"></canvas>
+						</div>
+						<hr>
+						<div class="chart">
+							<canvas id="transaksi-chart1" width="1000" height="280"></canvas>
+						</div>
+						<hr>
+						<div id="transaksi-detail">
 
-				</div>
-				<hr>
-				<div id="transaksi-detail2">
+						</div>
+						<hr>
+						<div id="transaksi-detail2">
 
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

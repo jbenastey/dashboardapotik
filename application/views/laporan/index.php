@@ -29,6 +29,7 @@
 								<th>Tempat</th>
 								<th>Jenis Bayar</th>
 								<th>Produsen</th>
+								<th>Tanggal</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -44,6 +45,7 @@
 									<td><?= $value['penjual_tempat'] ?></td>
 									<td><?= $value['penjual_jenis_bayar'] ?></td>
 									<td><?= $value['produsen_nama'] ?></td>
+									<td><?= $value['waktu_tanggal'] ?>-<?= $value['waktu_bulan'] ?>-<?= $value['waktu_tahun'] ?></td>
 								</tr>
 							<?php
 							endforeach;

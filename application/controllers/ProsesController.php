@@ -210,6 +210,7 @@ class ProsesController extends CI_Controller
 				array_push($dataDimensi['waktu'], array(
 					'waktu' => date('H:i:s'),
 					'waktu_hari' => $this->hari(date('l')),
+					'waktu_tanggal' => date('d'),
 					'waktu_bulan' => date('m'),
 					'waktu_tahun' => date('Y'),
 				));
@@ -526,5 +527,55 @@ class ProsesController extends CI_Controller
 		$this->load->view('template/header');
 		$this->load->view('laporan/index', $data);
 		$this->load->view('template/footer');
+	}
+
+	public function grafik_tahun()
+	{
+		$obat = array(
+			'data2015' => count($this->proses->transaksi_tahun('2015')),
+			'data2016' => count($this->proses->transaksi_tahun('2016')),
+			'data2017' => count($this->proses->transaksi_tahun('2017')),
+			'data2018' => count($this->proses->transaksi_tahun('2018')),
+			'data2019' => count($this->proses->transaksi_tahun('2019')),
+			'data2020' => count($this->proses->transaksi_tahun('2020')),
+		);
+		echo json_encode($obat);
+	}
+
+	public function datagrafik($tahun)
+	{
+		$transaksi = $this->proses->transaksi_tahun($tahun);
+
+		$lain_total = 0;
+
+		$askes_total = 0;
+
+		$non_total = 0;
+
+		foreach ($transaksi as $value) {
+			if ($value['penjual_jenis_bayar'] == 'LAINNYA') {
+				$lain_total++;
+			}
+			if ($value['penjual_jenis_bayar'] == 'ASKES') {
+				$askes_total++;
+			}
+			if ($value['penjual_jenis_bayar'] == 'NONASKES') {
+				$non_total++;
+			}
+		}
+
+		$data = array(
+			'lain_total' => $lain_total,
+
+			'askes_total' => $askes_total,
+
+			'non_total' => $non_total,
+		);
+		echo json_encode($data);
+	}
+
+	public function grafik_kategori($kategori,$tahun){
+		$transaksi = $this->proses->transaksi_kategori($kategori,$tahun);
+		echo json_encode($transaksi);
 	}
 }

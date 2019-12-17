@@ -14,7 +14,7 @@ $(document).ready(function () {
 	var $salesChart = $('#transaksi-chart');
 	var $salesChart1 = $('#transaksi-chart1');
 	$.ajax({
-		url : root + 'grafik-tahun',
+		url : root + 'transaksi/grafik-tahun',
 		type : 'GET',
 		async : true,
 		cache : false,
@@ -132,7 +132,7 @@ $(document).ready(function () {
 		console.log(tahun);
 		var html = '';
 		$.ajax({
-			url: root + 'data-grafik/' + tahun,
+			url: root + 'transaksi/data-grafik/' + tahun,
 			type: 'GET',
 			async: true,
 			cache: false,
@@ -158,14 +158,66 @@ $(document).ready(function () {
 							{
 								label: 'Penjualan',
 								backgroundColor:
-									"#007bff",
+									"#0000ff",
 								borderColor:
-									"#007bff",
+									"#0000ff",
 								data:
 									[
-										response.askes_total,
-										response.non_total,
-										response.lain_total,
+										response.askes_penjualan,
+										response.non_penjualan,
+										response.lain_penjualan,
+									]
+							},
+							{
+								label: 'Pembelian',
+								backgroundColor:
+									"#ff0f60",
+								borderColor:
+									"#ff0f60",
+								data:
+									[
+										response.askes_pembelian,
+										response.non_pembelian,
+										response.lain_pembelian,
+									]
+							},
+							{
+								label: 'Koreksi Penjualan',
+								backgroundColor:
+									"#ffb100",
+								borderColor:
+									"#ffb100",
+								data:
+									[
+										response.askes_koreksi,
+										response.non_koreksi,
+										response.lain_koreksi,
+									]
+							},
+							{
+								label: 'Koreksi Persediaan',
+								backgroundColor:
+									"#2cff28",
+								borderColor:
+									"#2cff28",
+								data:
+									[
+										response.askes_sedia,
+										response.non_sedia,
+										response.lain_sedia,
+									]
+							},
+							{
+								label: 'Mutasi',
+								backgroundColor:
+									"#24ceff",
+								borderColor:
+									"#24ceff",
+								data:
+									[
+										response.askes_mutasi,
+										response.non_mutasi,
+										response.lain_mutasi,
 									]
 							},
 						]
@@ -247,7 +299,7 @@ $(document).ready(function () {
 		console.log(label);
 		var html2 = '';
 		$.ajax({
-			url: root + 'grafik-kategori/'+label+'/'+tahun,
+			url: root + 'transaksi/grafik-kategori/'+label+'/'+tahun,
 			type: 'GET',
 			async: true,
 			cache: false,
@@ -257,36 +309,110 @@ $(document).ready(function () {
 				html2 += '' +
 					'<h3>Grafik Transaksi Kategori '+label+'</h3>' +
 					'<div class="chart">' +
-					'<canvas id="transaksi-chart4" width="1000" height="1000"></canvas>' +
+					'<canvas id="transaksi-chart4" width="1000"></canvas>' +
 					'</div>';
 				$('#transaksi-detail2').html(html2);
 
 
-				var obat_nama = [];
-				var total = [];
+				var nama = [];
+				var penjualan = [];
+				var pembelian = [];
+				var koreksi = [];
+				var sedia = [];
+				var mutasi = [];
 
 				for(var i = 0; i < response.length; i++){
-						obat_nama.push(response[i]['obat_nama']);
-						total.push(response[i]['total']);
+					if (response[i]['jenis_transaksi'] === 'PENJUALAN'){
+						nama.push(response[i]['nama_obat']);
+						penjualan.push(1);
+						pembelian.push(0);
+						koreksi.push(0);
+						sedia.push(0);
+						mutasi.push(0);
+					}
+					else if (response[i]['jenis_transaksi'] === 'PEMBELIAN'){
+						nama.push(response[i]['nama_obat']);
+						penjualan.push(0);
+						pembelian.push(1);
+						koreksi.push(0);
+						sedia.push(0);
+						mutasi.push(0);
+					}
+					else if (response[i]['jenis_transaksi'] === 'KOREKSI PERSEDIAAN'){
+						nama.push(response[i]['nama_obat']);
+						penjualan.push(0);
+						pembelian.push(0);
+						koreksi.push(0);
+						sedia.push(1);
+						mutasi.push(0);
+					}
+					else if (response[i]['jenis_transaksi'] === 'KOREKSI PENJUALAN'){
+						nama.push(response[i]['nama_obat']);
+						penjualan.push(0);
+						pembelian.push(0);
+						koreksi.push(1);
+						sedia.push(0);
+						mutasi.push(0);
+					}
+					else if (response[i]['jenis_transaksi'] === 'MUTASI'){
+						nama.push(response[i]['nama_obat']);
+						penjualan.push(1);
+						pembelian.push(0);
+						koreksi.push(0);
+						sedia.push(0);
+						mutasi.push(0);
+					}
 				}
 
-				console.log(obat_nama);
-				console.log(total);
+				console.log(nama);
+				console.log(sedia);
 
 				var $salesChart5 = $('#transaksi-chart4');
 				var salesChart5 = new Chart($salesChart5, {
 					type: 'horizontalBar',
 					data: {
-						labels: obat_nama,
+						labels: nama,
 						datasets: [
+							{
+								label: 'Pembelian',
+								backgroundColor:
+									"#0000ff",
+								borderColor:
+									"#0000ff",
+								data: pembelian
+							},
 							{
 								label: 'Penjualan',
 								backgroundColor:
 									"#DEB840",
 								borderColor:
 									"#DEB840",
-								data: total
+								data: penjualan
 							},
+							{
+								label: 'Koreksi Penjualan',
+								backgroundColor:
+									"#de2c00",
+								borderColor:
+									"#de2c00",
+								data: koreksi
+							},
+							{
+								label: 'Koreksi Persediaan',
+								backgroundColor:
+									"#35de06",
+								borderColor:
+									"#35de06",
+								data: sedia
+							},
+							{
+								label: 'Mutasi',
+								backgroundColor:
+									"#de14c7",
+								borderColor:
+									"#de14c7",
+								data: mutasi
+							}
 
 						]
 					},
