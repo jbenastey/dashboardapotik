@@ -63,4 +63,16 @@ class ProsesModel extends CI_Model
 		$query = $this->db->get('excel_peminjam');
 		return $query->result_array();
 	}
+	public function laporan()
+	{
+		$this->db->select('*');
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_golongan','excel_golongan.golongan_id = fact_penjualan.id_golongan');
+		$this->db->join('excel_kategori','excel_kategori.kategori_id = fact_penjualan.id_kategori');
+		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
+		$this->db->join('excel_penjual','excel_penjual.penjual_id = fact_penjualan.id_penjual');
+		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 }

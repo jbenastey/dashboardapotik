@@ -16,6 +16,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="<?= base_url ('assets/plugins/datatables/dataTables.bootstrap4.min.css') ?>">
+	<link rel="shortcut icon" href="<?=base_url()?>assets/img/AdminLTELogo.png">
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -102,6 +103,12 @@ to get the desired effect
 				<a href="<?=base_url('fakta')?>" class="nav-link <?php if ($this->uri->segment('1') == 'fakta') echo 'active'?>">
 					<i class="nav-icon fa fa-file"></i>
 					<p>Tabel Fakta</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="<?=base_url('laporan')?>" class="nav-link <?php if ($this->uri->segment('1') == 'laporan') echo 'active'?>">
+					<i class="nav-icon fa fa-files-o"></i>
+					<p>Laporan</p>
 				</a>
 			</li>
           

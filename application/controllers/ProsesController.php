@@ -518,4 +518,13 @@ class ProsesController extends CI_Controller
 		);
 		echo json_encode($data);
 	}
+
+	public function laporan(){
+		$data = array(
+			'laporan' => $this->proses->laporan()
+		);
+		$this->load->view('template/header');
+		$this->load->view('laporan/index', $data);
+		$this->load->view('template/footer');
+	}
 }

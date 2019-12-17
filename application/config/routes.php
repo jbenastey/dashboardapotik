@@ -83,6 +83,7 @@ $route['refresh'] = 'ProsesController/refresh';
 $route['fakta'] = 'ProsesController/fakta';
 $route['refresh_fakta'] = 'ProsesController/refreshFakta';
 $route['banyak'] = 'ProsesController/terbanyak';
+$route['laporan'] = 'ProsesController/laporan';
 
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';
