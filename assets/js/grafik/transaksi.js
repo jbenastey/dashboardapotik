@@ -94,7 +94,8 @@ $(document).ready(function () {
 							var series = element[0]._model.datasetLabel;
 							var label = element[0]._model.label;
 							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
-							transaksi_tahun(label);
+							// transaksi_tahun(label);
+							transaksi_bulan(label);
 						}
 					},
 					maintainAspectRatio: false,
@@ -128,11 +129,11 @@ $(document).ready(function () {
 	});
 
 
-	function transaksi_tahun(tahun) {
+	function transaksi_bulan(tahun) {
 		console.log(tahun);
 		var html = '';
 		$.ajax({
-			url: root + 'data-grafik/' + tahun,
+			url: root + 'grafik-bulan/' + tahun,
 			type: 'GET',
 			async: true,
 			cache: false,
@@ -140,7 +141,88 @@ $(document).ready(function () {
 			success: function (response) {
 				console.log(response);
 				html += '' +
-					'<h3>Grafik Transaksi Tahun ' + tahun + '</h3>' +
+					'<h3>Grafik Obat Tahun ' + tahun + '</h3>' +
+					'<div class="chart">' +
+					'<canvas id="obat-chart6" width="1000" height="280"></canvas>' +
+					'</div>';
+				$('#detail3').html(html);
+
+				var $salesChart = $('#obat-chart6');
+				var salesChart3 = new Chart($salesChart, {
+					type: 'bar',
+					data: {
+						labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+						datasets: [
+							{
+								label: 'Jumlah',
+								backgroundColor:
+									"#0000ff",
+								borderColor:
+									"#0000ff",
+								data:
+									[
+										response.jan.length,
+										response.feb.length,
+										response.mar.length,
+										response.apr.length,
+										response.mei.length,
+										response.jun.length,
+										response.jul.length,
+										response.agu.length,
+										response.sep.length,
+										response.okt.length,
+										response.nov.length,
+										response.des.length,
+									]
+							}
+
+						]
+					},
+					options: {
+						onClick: function (event, array) {
+							let element = this.getElementAtEvent(event);
+							if (element.length > 0) {
+								var series = element[0]._model.datasetLabel;
+								var label = element[0]._model.label;
+								var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+								transaksi_tahun(tahun,label);
+							}
+						},
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						},
+					}
+				});
+			}
+		});
+	}
+
+
+	function transaksi_tahun(tahun,bulan) {
+		console.log(tahun);
+		console.log(bulan);
+		var bulannya = angkaBulan(bulan);
+		var html = '';
+		$.ajax({
+			url: root + 'data-grafik/' + tahun + '/' + bulannya,
+			type: 'GET',
+			async: true,
+			cache: false,
+			dataType: 'json',
+			success: function (response) {
+				console.log(response);
+				html += '' +
+					'<h3>Grafik Transaksi '+bulan+' ' + tahun + '</h3>' +
 					'<div class="chart">' +
 					'<canvas id="transaksi-chart2" width="1000" height="280"></canvas>' +
 					'</div><hr>' +
@@ -153,7 +235,7 @@ $(document).ready(function () {
 				var salesChart3 = new Chart($salesChart2, {
 					type: 'bar',
 					data: {
-						labels: ["ASKES", "NONASKES", "LAINNYA"],
+						labels: ["ASKES", "NON ASKES", "LAINNYA"],
 						datasets: [
 							{
 								label: 'Penjualan',
@@ -177,7 +259,7 @@ $(document).ready(function () {
 								var series = element[0]._model.datasetLabel;
 								var label = element[0]._model.label;
 								var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
-								transaksi_kategori(label,tahun);
+								transaksi_kategori(label,tahun,bulannya);
 							}
 						},
 						maintainAspectRatio: false,
@@ -193,13 +275,20 @@ $(document).ready(function () {
 							display: true,
 							position: 'bottom',
 						},
+					scales: {
+						yAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
 					}
 				});
 				var $salesChart3 = $('#transaksi-chart3');
 				var salesChart2 = new Chart($salesChart3, {
 					type: 'pie',
 					data: {
-						labels: ["LAINNYA", "ASKES", "NONASKES"],
+						labels: ["LAINNYA", "ASKES", "NON ASKES"],
 						datasets: [
 							{
 								label: 'bentuk',
@@ -236,24 +325,25 @@ $(document).ready(function () {
 						legend: {
 							display: true,
 							position: 'bottom',
-						},
+						}
 					}
 				});
 			}
 		})
 	}
 
-	function transaksi_kategori(label,tahun) {
+	function transaksi_kategori(label,tahun,bulannya) {
+		var label = label.replace(' ','-');
 		console.log(label);
 		var html2 = '';
 		$.ajax({
-			url: root + 'grafik-kategori/'+label+'/'+tahun,
+			url: root + 'grafik-kategori/'+label+'/'+tahun+'/'+bulannya,
 			type: 'GET',
 			async: true,
 			cache: false,
 			dataType: 'json',
 			success: function (response) {
-				console.log(response);
+				console.log(root + 'grafik-kategori/'+label+'/'+tahun);
 				html2 += '' +
 					'<h3>Grafik Transaksi Kategori '+label+'</h3>' +
 					'<div class="chart">' +
@@ -305,7 +395,7 @@ $(document).ready(function () {
 							position: 'bottom',
 						},
 						scales: {
-							yAxes:[{
+							xAxes:[{
 								ticks: {
 									beginAtZero : true
 								}
@@ -317,4 +407,34 @@ $(document).ready(function () {
 		})
 	}
 })
+
+
+function angkaBulan(bulan) {
+	if (bulan === 'Januari'){
+		return '01';
+	}else if (bulan === 'Februari'){
+		return '02';
+	}else if (bulan === 'Maret'){
+		return '03';
+	}else if (bulan === 'April'){
+		return '04';
+	}else if (bulan === 'Mei'){
+		return '05';
+	}else if (bulan === 'Juni'){
+		return '06';
+	}else if (bulan === 'Juli'){
+		return '07';
+	}else if (bulan === 'Agustus'){
+		return '08';
+	}else if (bulan === 'September'){
+		return '09';
+	}else if (bulan === 'Oktober'){
+		return '10';
+	}else if (bulan === 'November'){
+		return '11';
+	}else if (bulan === 'Desember'){
+		return '12';
+	}
+}
+
 

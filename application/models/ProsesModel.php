@@ -91,7 +91,7 @@ class ProsesModel extends CI_Model
 		return $query->result_array();
 	}
 
-	public function transaksi_kategori($kategori,$tahun){
+	public function transaksi_kategori($kategori,$tahun,$bulan){
 		$this->db->select('obat_nama, count(obat_nama) as total');
 		$this->db->from('fact_penjualan');
 		$this->db->join('excel_golongan','excel_golongan.golongan_id = fact_penjualan.id_golongan');
@@ -102,8 +102,24 @@ class ProsesModel extends CI_Model
 		$this->db->join('dim_waktu','dim_waktu.waktu_id = fact_penjualan.id_waktu');
 		$this->db->where('penjual_jenis_bayar',$kategori);
 		$this->db->like('waktu_tahun',$tahun);
+		$this->db->like('waktu_bulan',$bulan);
 		$this->db->group_by('obat_nama');
 		$this->db->order_by('total','desc');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function transaksi_bulan($tahun,$bulan){
+		$this->db->select('*');
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_golongan','excel_golongan.golongan_id = fact_penjualan.id_golongan');
+		$this->db->join('excel_kategori','excel_kategori.kategori_id = fact_penjualan.id_kategori');
+		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
+		$this->db->join('excel_penjual','excel_penjual.penjual_id = fact_penjualan.id_penjual');
+		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
+		$this->db->join('dim_waktu','dim_waktu.waktu_id = fact_penjualan.id_waktu');
+		$this->db->like('waktu_tahun',$tahun);
+		$this->db->like('waktu_bulan',$bulan);
 		$query = $this->db->get();
 		return $query->result_array();
 	}

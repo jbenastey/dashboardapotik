@@ -542,9 +542,9 @@ class ProsesController extends CI_Controller
 		echo json_encode($obat);
 	}
 
-	public function datagrafik($tahun)
+	public function datagrafik($tahun,$bulan)
 	{
-		$transaksi = $this->proses->transaksi_tahun($tahun);
+		$transaksi = $this->proses->transaksi_bulan($tahun,$bulan);
 
 		$lain_total = 0;
 
@@ -559,7 +559,7 @@ class ProsesController extends CI_Controller
 			if ($value['penjual_jenis_bayar'] == 'ASKES') {
 				$askes_total++;
 			}
-			if ($value['penjual_jenis_bayar'] == 'NONASKES') {
+			if ($value['penjual_jenis_bayar'] == 'NON ASKES') {
 				$non_total++;
 			}
 		}
@@ -574,8 +574,56 @@ class ProsesController extends CI_Controller
 		echo json_encode($data);
 	}
 
-	public function grafik_kategori($kategori,$tahun){
-		$transaksi = $this->proses->transaksi_kategori($kategori,$tahun);
+	public function grafik_kategori($kategori,$tahun,$bulan){
+
+		$transaksi = $this->proses->transaksi_kategori(str_replace('-',' ',$kategori),$tahun,$bulan);
 		echo json_encode($transaksi);
+	}
+
+
+	public function grafik_bulan($tahun){
+		$obat = $this->proses->transaksi_tahun($tahun);
+		$data = array(
+			'jan' => array(),
+			'feb' => array(),
+			'mar' => array(),
+			'apr' => array(),
+			'mei' => array(),
+			'jun' => array(),
+			'jul' => array(),
+			'agu' => array(),
+			'sep' => array(),
+			'okt' => array(),
+			'nov' => array(),
+			'des' => array(),
+		);
+		foreach ($obat as $key=>$value) {
+			if ($value['waktu_bulan'] == '01'){
+				array_push($data['jan'],$value);
+			}elseif ($value['waktu_bulan'] == '02'){
+				array_push($data['feb'],$value);
+			}elseif ($value['waktu_bulan'] == '03'){
+				array_push($data['mar'],$value);
+			}elseif ($value['waktu_bulan'] == '04'){
+				array_push($data['apr'],$value);
+			}elseif ($value['waktu_bulan'] == '05'){
+				array_push($data['mei'],$value);
+			}elseif ($value['waktu_bulan'] == '06'){
+				array_push($data['jun'],$value);
+			}elseif ($value['waktu_bulan'] == '07'){
+				array_push($data['jul'],$value);
+			}elseif ($value['waktu_bulan'] == '08'){
+				array_push($data['agu'],$value);
+			}elseif ($value['waktu_bulan'] == '09'){
+				array_push($data['sep'],$value);
+			}elseif ($value['waktu_bulan'] == '10'){
+				array_push($data['okt'],$value);
+			}elseif ($value['waktu_bulan'] == '11'){
+				array_push($data['nov'],$value);
+			}elseif ($value['waktu_bulan'] == '12'){
+				array_push($data['des'],$value);
+			}
+		}
+		echo json_encode($data);
 	}
 }

@@ -85,8 +85,9 @@ $route['refresh_fakta'] = 'ProsesController/refreshFakta';
 $route['banyak'] = 'ProsesController/terbanyak';
 $route['laporan'] = 'ProsesController/laporan';
 $route['grafik-tahun'] = 'ProsesController/grafik_tahun';
-$route['data-grafik/(:any)'] = 'ProsesController/datagrafik/$1';
-$route['grafik-kategori/(:any)/(:any)'] = 'ProsesController/grafik_kategori/$1/$2';
+$route['data-grafik/(:any)/(:any)'] = 'ProsesController/datagrafik/$1/$2';
+$route['grafik-kategori/(:any)/(:any)/(:any)'] = 'ProsesController/grafik_kategori/$1/$2/$3';
+$route['grafik-bulan/(:any)'] = 'ProsesController/grafik_bulan/$1';
 
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';
