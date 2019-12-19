@@ -406,6 +406,156 @@ $(document).ready(function () {
 			}
 		})
 	}
+
+
+	$.ajax({
+		url: root + 'banyak',
+		type: 'GET',
+		async: true,
+		cache: false,
+		dataType: 'json',
+		success: function (response) {
+			console.log(response.obat[0]);
+
+			$('#obat-banyak').html(response.obat[0].obat_nama);
+			$('#produsen-banyak').html(response.produsen[0].produsen_nama);
+
+			var obat = [];
+			var jumlahObat = [];
+			if (response.obat.length < 10){
+				for (var i = 0; i < response.obat.length; i++) {
+					obat.push(response.obat[i].obat_nama);
+					jumlahObat.push(response.obat[i].total)
+				}
+			} else {
+				for (var i = 0; i < 10; i++) {
+					obat.push(response.obat[i].obat_nama);
+					jumlahObat.push(response.obat[i].total);
+				}
+			}
+
+			var produsen = [];
+			var jumlahProdusen = [];
+			if (response.produsen.length < 10){
+				for (var i = 0; i < response.produsen.length; i++) {
+					produsen.push(response.produsen[i].produsen_nama);
+					jumlahProdusen.push(response.produsen[i].total)
+				}
+			} else {
+				for (var i = 0; i < 10; i++) {
+					produsen.push(response.produsen[i].produsen_nama);
+					jumlahProdusen.push(response.produsen[i].total)
+				}
+			}
+			var buku_chart = $('#obat-banyak-chart');
+			var salesChart = new Chart(buku_chart, {
+				type: 'horizontalBar',
+				data: {
+					labels: obat,
+					datasets: [
+						{
+							label: 'jumlah',
+							backgroundColor:
+								"#DEB887",
+							borderColor:
+								"#DEB887",
+							data:
+							jumlahObat
+						}]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							obat_tahun(label);
+						}
+					}
+					,
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Jumlah Obat Terjual Terbanyak',
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						xAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+
+			var pinjam_chart = $('#produsen-banyak-chart');
+			var salesChart = new Chart(pinjam_chart, {
+				type: 'horizontalBar',
+				data: {
+					labels: produsen,
+					datasets: [
+						{
+							label: 'jumlah',
+							backgroundColor:
+								"#DEB887",
+							borderColor:
+								"#DEB887",
+							data:
+							jumlahProdusen
+						}]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							obat_tahun(label);
+						}
+					}
+					,
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Jumlah Nama Produsen Terbanyak',
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						xAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+		}
+	})
 })
 
 

@@ -123,4 +123,21 @@ class ProsesModel extends CI_Model
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+
+	public function obat_terbanyak()
+	{
+		$this->db->select('*, count(obat_nama) as total');
+		$this->db->group_by('obat_nama');
+		$this->db->order_by('total','desc');
+		$query = $this->db->get('excel_obat');
+		return $query->result_array();
+	}
+	public function produsen_terbanyak()
+	{
+		$this->db->select('*, count(produsen_nama) as total');
+		$this->db->group_by('produsen_nama');
+		$this->db->order_by('total','desc');
+		$query = $this->db->get('excel_produsen');
+		return $query->result_array();
+	}
 }

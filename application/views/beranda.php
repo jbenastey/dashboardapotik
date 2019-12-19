@@ -75,6 +75,36 @@
 			</div>
 		</div>
 		<div class="row">
+			<div class="col-lg-6 col-6">
+				<div class="small-box bg-primary-gradient">
+					<div class="inner">
+						<h4>&nbsp;<span id="obat-banyak"></span></h4>
+						<br>
+						<p>Buku Terbanyak </p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-book"></i>
+					</div>
+					<a href="#banyak" class="small-box-footer d-print-none">Lihat Data <i
+							class="fa fa-arrow-circle-down"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-6 col-6">
+				<div class="small-box bg-primary-gradient">
+					<div class="inner">
+						<h4>&nbsp;<span id="produsen-banyak"></span></h4>
+						<br>
+						<p>Peminjam Terbanyak </p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-user"></i>
+					</div>
+					<a href="#banyak" class="small-box-footer d-print-none">Lihat Data <i
+							class="fa fa-arrow-circle-down"></i></a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
@@ -96,6 +126,26 @@
 						<hr>
 						<div id="transaksi-detail2">
 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="banyak">
+			<div class="col-6">
+				<div class="card">
+					<div class="card-body">
+						<div class="chart">
+							<canvas id="obat-banyak-chart" height="1000"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="card">
+					<div class="card-body">
+						<div class="chart">
+							<canvas id="produsen-banyak-chart" height="1000"></canvas>
 						</div>
 					</div>
 				</div>
