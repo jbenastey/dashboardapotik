@@ -73,8 +73,8 @@ $(document).ready(function () {
 					datasets: [
 						{
 							label		   : 'Jumlah Transaksi',
-							backgroundColor: '#007bff',
-							borderColor    : '#007bff',
+							backgroundColor: '#00ff32',
+							borderColor    : '#00ff32',
 							data           : [
 							response.data2015,
 							response.data2016,
@@ -156,9 +156,9 @@ $(document).ready(function () {
 							{
 								label: 'Jumlah',
 								backgroundColor:
-									"#0000ff",
+									"#ff00ff",
 								borderColor:
-									"#0000ff",
+									"#ff00ff",
 								data:
 									[
 										response.jan.length,
@@ -240,9 +240,9 @@ $(document).ready(function () {
 							{
 								label: 'Penjualan',
 								backgroundColor:
-									"#007bff",
+									"#ff6b00",
 								borderColor:
-									"#007bff",
+									"#ff6b00",
 								data:
 									[
 										response.askes_total,

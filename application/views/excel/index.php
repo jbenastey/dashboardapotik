@@ -17,11 +17,12 @@
 					<div class="card-header d-flex p-0">
 						<h3 class="card-title p-3">Data Excel</h3>
 						<ul class="nav nav-pills ml-auto p-2">
-							<li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Kategori</a></li>
-							<li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Golongan</a></li>
-							<li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">Obat</a></li>
-							<li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab">Penjual</a></li>
-							<li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab">Produsen</a></li>
+							<li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Obat</a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Produsen</a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">Ruangan</a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab">Pasien</a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab">Dokter</a></li>
+							<li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab">Transaksi</a></li>
 						</ul>
 					</div><!-- /.card-header -->
 					<div class="card-body">
@@ -31,19 +32,25 @@
 									<thead class="text-center">
 									<tr>
 										<th>No</th>
-										<th>Nama Kategori</th>
-										<th>Keterangan</th>
+										<th>Kode Obat</th>
+										<th>Nama Obat</th>
+										<th>Golongan Obat</th>
+										<th>Bentuk Obat</th>
+										<th>Depo Farmasi</th>
 									</tr>
 									</thead>
 									<tbody>
 									<?php
 									$no = 1;
-									foreach($kategori as $key=>$value):
+									foreach($obat as $key=>$value):
 									?>
 									<tr>
 										<td><?= $no ?></td>
-										<td><?= $value['kategori_nama'] ?></td>
-										<td><?= $value['kategori_keterangan'] ?></td>
+										<td><?= $value['obat_kode'] ?></td>
+										<td><?= $value['obat_nama'] ?></td>
+										<td><?= $value['obat_golongan'] ?></td>
+										<td><?= $value['obat_bentuk'] ?></td>
+										<td><?= $value['obat_depo'] ?></td>
 									</tr>
 									<?php
 									$no++;
@@ -58,19 +65,17 @@
 									<thead class="text-center">
 									<tr>
 										<th>No</th>
-										<th>Nama Golongan</th>
-										<th>Keterangan</th>
+										<th>Nama Produsen</th>
 									</tr>
 									</thead>
 									<tbody>
 									<?php
 									$no = 1;
-									foreach($golongan as $key=>$value):
+									foreach($produsen as $key=>$value):
 										?>
 										<tr>
 											<td><?= $no ?></td>
-											<td><?= $value['golongan_nama'] ?></td>
-											<td><?= $value['golongan_keterangan'] ?></td>
+											<td><?= $value['produsen_nama'] ?></td>
 										</tr>
 										<?php
 										$no++;
@@ -85,21 +90,19 @@
 									<thead class="text-center">
 									<tr>
 										<th>No</th>
-										<th>Kode Obat</th>
-										<th>Nama Obat</th>
-										<th>Harga Obat</th>
+										<th>Poliklinik / Ruangan</th>
+										<th>Jenis Masuk</th>
 									</tr>
 									</thead>
 									<tbody>
 									<?php
 									$no = 1;
-									foreach($obat as $key=>$value):
+									foreach($ruang as $key=>$value):
 										?>
 										<tr>
 											<td><?= $no ?></td>
-											<td><?= $value['obat_kode'] ?></td>
-											<td><?= $value['obat_nama'] ?></td>
-											<td><?= $value['obat_harga'] ?></td>
+											<td><?= $value['ruang_poliklinik'] ?></td>
+											<td><?= $value['ruang_jenis_masuk'] ?></td>
 										</tr>
 										<?php
 										$no++;
@@ -114,19 +117,21 @@
 									<thead class="text-center">
 									<tr>
 										<th>No</th>
-										<th>Tempat Penjual</th>
-										<th>Jenis Bayar</th>
+										<th>Nama Pasien</th>
+										<th>Jenis Kelamin</th>
+										<th>Umur</th>
 									</tr>
 									</thead>
 									<tbody>
 									<?php
 									$no = 1;
-									foreach($penjual as $key=>$value):
+									foreach($pasien as $key=>$value):
 										?>
 										<tr>
 											<td><?= $no ?></td>
-											<td><?= $value['penjual_tempat'] ?></td>
-											<td><?= $value['penjual_jenis_bayar'] ?></td>
+											<td><?= $value['pasien_nama'] ?></td>
+											<td><?= $value['pasien_jenis_kelamin'] ?></td>
+											<td><?= $value['pasien_umur'] ?></td>
 										</tr>
 										<?php
 										$no++;
@@ -141,20 +146,51 @@
 									<thead class="text-center">
 									<tr>
 										<th>No</th>
-										<th>Nama Produsen</th>
-										<th>Tempat Produsen</th>
+										<th>Nama Dokter</th>
 									</tr>
 									</thead>
 									<tbody>
 									<?php
 									$no = 1;
-									foreach($produsen as $key=>$value):
+									foreach($dokter as $key=>$value):
 										?>
 										<tr>
 											<td><?= $no ?></td>
-											<td><?= $value['produsen_nama'] ?></td>
-											<td><?= $value['produsen_tempat'] ?></td>
-										</tr>
+											<td><?= $value['dokter_nama'] ?></td>
+											</tr>
+										<?php
+										$no++;
+									endforeach;
+									?>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.tab-pane -->
+							<div class="tab-pane" id="tab_6">
+								<table class="table table-bordered table-striped example1">
+									<thead class="text-center">
+									<tr>
+										<th>No</th>
+										<th>Kelompok</th>
+										<th>Harga</th>
+										<th>Jumlah</th>
+										<th>Cara Bayar</th>
+										<th>Tanggal</th>
+									</tr>
+									</thead>
+									<tbody>
+									<?php
+									$no = 1;
+									foreach($transaksi as $key=>$value):
+										?>
+										<tr>
+											<td><?= $no ?></td>
+											<td><?= $value['transaksi_kelompok'] ?></td>
+											<td><?= $value['transaksi_harga'] ?></td>
+											<td><?= $value['transaksi_jumlah'] ?></td>
+											<td><?= $value['transaksi_cara_bayar'] ?></td>
+											<td><?= $value['transaksi_tanggal'] ?></td>
+											</tr>
 										<?php
 										$no++;
 									endforeach;

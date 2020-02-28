@@ -23,7 +23,7 @@ class ProsesController extends CI_Controller
 			$upload = $this->proses->upload_excel('excel');
 			if ($upload['result'] == 'success') {
 				$reader = new Reader\Xlsx();
-				$reader->setLoadSheetsOnly('kategori');
+				$reader->setLoadSheetsOnly('pasien');
 				$spreadsheet = $reader->load(FCPATH . 'excel/import/' . $upload['file']['file_name']);
 				$sheet = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
 //				var_dump($sheet);
@@ -36,17 +36,18 @@ class ProsesController extends CI_Controller
 					if ($numrow > 1) {
 						// Kita push (add) array data ke variabel data
 						array_push($data, array(
-							'kategori_nama' => $row['A'],
-							'kategori_keterangan' => $row['B'],
+							'pasien_nama' => $row['A'],
+							'pasien_jenis_kelamin' => $row['B'],
+							'pasien_umur' => $row['C'],
 						));
 					}
 
 					$numrow++; // Tambah 1 setiap kali looping
 				}
-				$this->proses->insert_excel('excel_kategori',$data);
+				$this->proses->insert_excel('excel_pasien',$data);
 //				var_dump($data);
 
-				$reader->setLoadSheetsOnly('golongan');
+				$reader->setLoadSheetsOnly('ruangan');
 				$spreadsheet = $reader->load(FCPATH . 'excel/import/' . $upload['file']['file_name']);
 				$sheet = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
 //				var_dump($sheet);die;
@@ -59,15 +60,59 @@ class ProsesController extends CI_Controller
 					if ($numrow > 1) {
 						// Kita push (add) array data ke variabel data
 						array_push($data, array(
-							'golongan_nama' => $row['A'],
-							'golongan_keterangan' => $row['B'],
+							'ruang_poliklinik' => $row['A'],
+							'ruang_jenis_masuk' => $row['B'],
 						));
 					}
 
 					$numrow++; // Tambah 1 setiap kali looping
 				}
 
-				$this->proses->insert_excel('excel_golongan',$data);
+				$this->proses->insert_excel('excel_ruang',$data);
+
+				$reader->setLoadSheetsOnly('dokter');
+				$spreadsheet = $reader->load(FCPATH . 'excel/import/' . $upload['file']['file_name']);
+				$sheet = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+//				var_dump($sheet);die;
+				$data = array();
+				$numrow = 1;
+				foreach ($sheet as $row) {
+					// Cek $numrow apakah lebih dari 1
+					// Artinya karena baris pertama adalah nama-nama kolom
+					// Jadi dilewat saja, tidak usah diimport
+					if ($numrow > 1) {
+						// Kita push (add) array data ke variabel data
+						array_push($data, array(
+							'dokter_nama' => $row['A'],
+						));
+					}
+
+					$numrow++; // Tambah 1 setiap kali looping
+				}
+
+				$this->proses->insert_excel('excel_dokter',$data);
+
+				$reader->setLoadSheetsOnly('produsen');
+				$spreadsheet = $reader->load(FCPATH . 'excel/import/' . $upload['file']['file_name']);
+				$sheet = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+//				var_dump($sheet);die;
+				$data = array();
+				$numrow = 1;
+				foreach ($sheet as $row) {
+					// Cek $numrow apakah lebih dari 1
+					// Artinya karena baris pertama adalah nama-nama kolom
+					// Jadi dilewat saja, tidak usah diimport
+					if ($numrow > 1) {
+						// Kita push (add) array data ke variabel data
+						array_push($data, array(
+							'produsen_nama' => $row['A'],
+						));
+					}
+
+					$numrow++; // Tambah 1 setiap kali looping
+				}
+
+				$this->proses->insert_excel('excel_produsen',$data);
 
 				$reader->setLoadSheetsOnly('obat');
 				$spreadsheet = $reader->load(FCPATH . 'excel/import/' . $upload['file']['file_name']);
@@ -84,7 +129,9 @@ class ProsesController extends CI_Controller
 						array_push($data, array(
 							'obat_kode' => $row['A'],
 							'obat_nama' => $row['B'],
-							'obat_harga' => $row['C'],
+							'obat_golongan' => $row['C'],
+							'obat_bentuk' => $row['D'],
+							'obat_depo' => $row['E'],
 						));
 					}
 
@@ -93,7 +140,8 @@ class ProsesController extends CI_Controller
 
 				$this->proses->insert_excel('excel_obat',$data);
 
-				$reader->setLoadSheetsOnly('produsen');
+
+				$reader->setLoadSheetsOnly('transaksi');
 				$spreadsheet = $reader->load(FCPATH . 'excel/import/' . $upload['file']['file_name']);
 				$sheet = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
 //				var_dump($sheet);die;
@@ -105,40 +153,26 @@ class ProsesController extends CI_Controller
 					// Jadi dilewat saja, tidak usah diimport
 					if ($numrow > 1) {
 						// Kita push (add) array data ke variabel data
+						$waktu = $row['E'];
+						$tanggal = explode(' ',$waktu);
+						$bulan = explode('/',$tanggal[0]);
+						$tgl = $bulan[1].'/'.$bulan[0].'/'.$bulan[2];
+//						var_dump($tgl);
+
 						array_push($data, array(
-							'produsen_nama' => $row['A'],
-							'produsen_tempat' => $row['B'],
+							'transaksi_kelompok' => $row['A'],
+							'transaksi_harga' => $row['B'],
+							'transaksi_jumlah' => $row['C'],
+							'transaksi_cara_bayar' => $row['D'],
+							'transaksi_tanggal' => $tgl,
 						));
 					}
 
 					$numrow++; // Tambah 1 setiap kali looping
 				}
 
-				$this->proses->insert_excel('excel_produsen',$data);
 
-				$reader->setLoadSheetsOnly('penjual');
-				$spreadsheet = $reader->load(FCPATH . 'excel/import/' . $upload['file']['file_name']);
-				$sheet = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-//				var_dump($sheet);die;
-				$data = array();
-				$numrow = 1;
-				foreach ($sheet as $row) {
-					// Cek $numrow apakah lebih dari 1
-					// Artinya karena baris pertama adalah nama-nama kolom
-					// Jadi dilewat saja, tidak usah diimport
-					if ($numrow > 1) {
-						// Kita push (add) array data ke variabel data
-						array_push($data, array(
-							'penjual_tempat' => $row['A'],
-							'penjual_jenis_bayar' => $row['B'],
-							'penjual_time' => $row['C'],
-						));
-					}
-
-					$numrow++; // Tambah 1 setiap kali looping
-				}
-
-				$this->proses->insert_excel('excel_penjual',$data);
+				$this->proses->insert_excel('excel_transaksi',$data);
 
 				redirect('mentah');
 			}
@@ -148,11 +182,12 @@ class ProsesController extends CI_Controller
 	public function excel()
 	{
 		$data = array(
-			'golongan' => $this->proses->lihat('excel_golongan'),
-			'kategori' => $this->proses->lihat('excel_kategori'),
+			'dokter' => $this->proses->lihat('excel_dokter'),
 			'obat' => $this->proses->lihat('excel_obat'),
-			'penjual' => $this->proses->lihat('excel_penjual'),
+			'pasien' => $this->proses->lihat('excel_pasien'),
 			'produsen' => $this->proses->lihat('excel_produsen'),
+			'ruang' => $this->proses->lihat('excel_ruang'),
+			'transaksi' => $this->proses->lihat('excel_transaksi'),
 		);
 		$this->load->view('template/header');
 		$this->load->view('excel/index', $data);

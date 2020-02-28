@@ -1,8 +1,9 @@
 <div class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
-			<div class="col-sm-6">
+			<div class="col-sm-6 col-lg-12">
 				<h1 class="m-0 text-dark">Beranda</h1>
+				<button type="button" onclick="window.print()" class="btn btn-sm btn-outline-primary float-right"><i class="fa fa-print"></i> Cetak</button>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
 	</div><!-- /.container-fluid -->
@@ -11,7 +12,7 @@
 <section class="content">
 	<div class="container-fluid">
 		<!-- Small boxes (Stat box) -->
-		<div class="row">
+		<div class="row d-print-none">
 			<div class="col-lg-3 col-6">
 				<!-- small box -->
 				<div class="small-box bg-secondary-gradient">
@@ -74,13 +75,14 @@
 				</div>
 			</div>
 		</div>
+		<br>
 		<div class="row">
 			<div class="col-lg-6 col-6">
-				<div class="small-box bg-primary-gradient">
+				<div class="small-box bg-warning-gradient">
 					<div class="inner">
 						<h4>&nbsp;<span id="obat-banyak"></span></h4>
 						<br>
-						<p>Buku Terbanyak </p>
+						<p>Obat Terbanyak </p>
 					</div>
 					<div class="icon">
 						<i class="fa fa-book"></i>
@@ -90,11 +92,11 @@
 				</div>
 			</div>
 			<div class="col-lg-6 col-6">
-				<div class="small-box bg-primary-gradient">
+				<div class="small-box bg-danger-gradient">
 					<div class="inner">
 						<h4>&nbsp;<span id="produsen-banyak"></span></h4>
 						<br>
-						<p>Peminjam Terbanyak </p>
+						<p>Produsen Terbanyak </p>
 					</div>
 					<div class="icon">
 						<i class="fa fa-user"></i>
@@ -169,7 +171,7 @@
 			<form action="<?= base_url('upload') ?>" method="post" enctype="multipart/form-data">
 				<div class="modal-body">
 					<div class="form-group">
-						<a href="<?= base_url() . 'excel/format/data.xlsx' ?>" class="btn btn-outline-primary"><i
+						<a href="<?= base_url() . 'excel/format/dataapotek.xlsx' ?>" class="btn btn-outline-primary"><i
 								class="fa fa-download"></i> Download Format</a>
 					</div>
 					<div class="form-group">
