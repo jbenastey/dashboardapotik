@@ -197,11 +197,12 @@ class ProsesController extends CI_Controller
 	public function dimensi()
 	{
 		$data = array(
-			'golongan' => $this->proses->lihat('dim_golongan'),
-			'kategori' => $this->proses->lihat('dim_kategori'),
+			'dokter' => $this->proses->lihat('dim_dokter'),
 			'obat' => $this->proses->lihat('dim_obat'),
-			'penjual' => $this->proses->lihat('dim_penjual'),
+			'pasien' => $this->proses->lihat('dim_pasien'),
 			'produsen' => $this->proses->lihat('dim_produsen'),
+			'ruang' => $this->proses->lihat('dim_ruang'),
+			'transaksi' => $this->proses->lihat('dim_transaksi'),
 			'waktu' => $this->proses->lihat('dim_waktu'),
 		);
 		$this->load->view('template/header');
