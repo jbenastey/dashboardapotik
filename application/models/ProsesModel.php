@@ -67,12 +67,14 @@ class ProsesModel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('fact_penjualan');
-		$this->db->join('excel_golongan','excel_golongan.golongan_id = fact_penjualan.id_golongan');
-		$this->db->join('excel_kategori','excel_kategori.kategori_id = fact_penjualan.id_kategori');
+		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
+		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
 		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
-		$this->db->join('excel_penjual','excel_penjual.penjual_id = fact_penjualan.id_penjual');
+		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
 		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
 		$this->db->join('dim_waktu','dim_waktu.waktu_id = fact_penjualan.id_waktu');
+		$this->db->join('dim_transaksi','dim_transaksi.transaksi_id = fact_penjualan.id_transaksi');
 		$query = $this->db->get();
 		return $query->result_array();
 	}
