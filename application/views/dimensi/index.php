@@ -176,6 +176,7 @@
 									<tr>
 										<th>waktu_id</th>
 										<th>waktu_hari</th>
+										<th>waktu_tanggal</th>
 										<th>waktu_bulan</th>
 										<th>waktu_tahun</th>
 									</tr>
@@ -187,6 +188,7 @@
 										<tr>
 											<td><?= $value['waktu_id'] ?></td>
 											<td><?= $value['waktu_hari'] ?></td>
+											<td><?= $value['waktu_tanggal'] ?></td>
 											<td><?= $value['waktu_bulan'] ?></td>
 											<td><?= $value['waktu_tahun'] ?></td>
 										</tr>

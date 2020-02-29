@@ -213,79 +213,57 @@ class ProsesController extends CI_Controller
 	public function refresh()
 	{
 		$data = array(
-			'golongan' => $this->proses->lihat('excel_golongan'),
-			'kategori' => $this->proses->lihat('excel_kategori'),
+			'dokter' => $this->proses->lihat('excel_dokter'),
 			'obat' => $this->proses->lihat('excel_obat'),
-			'penjual' => $this->proses->lihat('excel_penjual'),
+			'pasien' => $this->proses->lihat('excel_pasien'),
 			'produsen' => $this->proses->lihat('excel_produsen'),
+			'ruang' => $this->proses->lihat('excel_ruang'),
+			'transaksi' => $this->proses->lihat('excel_transaksi'),
 		);
 
 		$dimensiLama = array(
-			'golongan' => $this->proses->lihat('dim_golongan'),
-			'kategori' => $this->proses->lihat('dim_kategori'),
+			'dokter' => $this->proses->lihat('dim_dokter'),
 			'obat' => $this->proses->lihat('dim_obat'),
-			'penjual' => $this->proses->lihat('dim_penjual'),
+			'pasien' => $this->proses->lihat('dim_pasien'),
 			'produsen' => $this->proses->lihat('dim_produsen'),
+			'ruang' => $this->proses->lihat('dim_ruang'),
+			'transaksi' => $this->proses->lihat('dim_transaksi'),
 			'waktu' => $this->proses->lihat('dim_waktu'),
 		);
 
 		$dataDimensi = array(
-			'golongan' => array(),
-			'kategori' => array(),
+			'dokter' => array(),
 			'obat' => array(),
-			'penjual' => array(),
+			'pasien' => array(),
 			'produsen' => array(),
+			'ruang' => array(),
+			'transaksi' => array(),
 			'waktu' => array(),
 		);
 		//---------------------------------------------------------------------------------
-		if (count($data['golongan']) == 0) {
-			foreach ($data['golongan'] as $key => $value) {
-				array_push($dataDimensi['golongan'], array(
-					'golongan_id' => $value['golongan_id'],
-					'golongan_nama' => $value['golongan_nama'],
+		if (count($data['dokter']) == 0) {
+			foreach ($data['dokter'] as $key => $value) {
+				array_push($dataDimensi['dokter'], array(
+					'dokter_id' => $value['dokter_id'],
+					'dokter_nama' => $value['dokter_nama'],
 				));
 			}
-			$this->proses->insert_dimensi('dim_golongan', $dataDimensi['golongan']);
-		} elseif (count($data['golongan']) == count($dimensiLama['golongan'])) {
-			$dataDimensi['golongan'] = null;
+			$this->proses->insert_dimensi('dim_dokter', $dataDimensi['dokter']);
+		} elseif (count($data['dokter']) == count($dimensiLama['dokter'])) {
+			$dataDimensi['dokter'] = null;
 		} else {
-			foreach ($dimensiLama['golongan'] as $key => $value) {
-				if ($value['golongan_id'] == $data['golongan'][$key]['golongan_id']) {
-					unset($data['golongan'][$key]);
+			foreach ($dimensiLama['dokter'] as $key => $value) {
+				if ($value['dokter_id'] == $data['dokter'][$key]['dokter_id']) {
+					unset($data['dokter'][$key]);
 				}
 			}
-			foreach ($data['golongan'] as $key => $value) {
-				array_push($dataDimensi['golongan'], array(
-					'golongan_id' => $value['golongan_id'],
-					'golongan_nama' => $value['golongan_nama'],
+			foreach ($data['dokter'] as $key => $value) {
+				array_push($dataDimensi['dokter'], array(
+					'dokter_id' => $value['dokter_id'],
+					'dokter_nama' => $value['dokter_nama'],
 				));
 			}
-			$this->proses->insert_dimensi('dim_golongan', $dataDimensi['golongan']);
-		}
-		//---------------------------------------------------------------------------------
-		if (count($data['kategori']) == 0) {
-			foreach ($data['kategori'] as $key => $value) {
-				array_push($dataDimensi['kategori'], array(
-					'kategori_id' => $value['kategori_id'],
-					'kategori_nama' => $value['kategori_nama'],
-				));
-			}
-			$this->proses->insert_dimensi('dim_kategori', $dataDimensi['kategori']);
-		} elseif (count($data['kategori']) == count($dimensiLama['kategori'])) {
-			$dataDimensi['kategori'] = null;
-		} else {
-			foreach ($dimensiLama['kategori'] as $key => $value) {
-				if ($value['kategori_id'] == $data['kategori'][$key]['kategori_id']) {
-					unset($data['kategori'][$key]);
-				}
-			}
-			foreach ($data['kategori'] as $key => $value) {
-				array_push($dataDimensi['kategori'], array(
-					'kategori_id' => $value['kategori_id'],
-					'kategori_nama' => $value['kategori_nama'],
-				));
-			}
-			$this->proses->insert_dimensi('dim_kategori', $dataDimensi['kategori']);
+			$this->proses->insert_dimensi('dim_dokter', $dataDimensi['dokter']);
 		}
 		//---------------------------------------------------------------------------------
 		if (count($data['obat']) == 0) {
@@ -315,53 +293,31 @@ class ProsesController extends CI_Controller
 			$this->proses->insert_dimensi('dim_obat', $dataDimensi['obat']);
 		}
 		//---------------------------------------------------------------------------------
-
-		if (count($data['penjual']) == 0) {
-			foreach ($data['penjual'] as $key => $value) {
-				array_push($dataDimensi['penjual'], array(
-					'penjual_id' => $value['penjual_id'],
-					'penjual_tempat' => $value['penjual_tempat'],
-				));
-				$waktu = $value['penjual_time'];
-				$pecah = explode('/',$waktu);
-				array_push($dataDimensi['waktu'], array(
-					'waktu' => date('H:i:s'),
-					'waktu_hari' => $this->hari(date('l')),
-					'waktu_tanggal' => date('d'),
-					'waktu_bulan' => $pecah[1],
-					'waktu_tahun' => $pecah[2],
+		if (count($data['pasien']) == 0) {
+			foreach ($data['pasien'] as $key => $value) {
+				array_push($dataDimensi['pasien'], array(
+					'pasien_id' => $value['pasien_id'],
+					'pasien_nama' => $value['pasien_nama'],
 				));
 			}
-			$this->proses->insert_dimensi('dim_penjual', $dataDimensi['penjual']);
-			$this->proses->insert_dimensi('dim_waktu', $dataDimensi['waktu']);
-		} elseif (count($data['penjual']) == count($dimensiLama['penjual'])) {
-			$dataDimensi['penjual'] = null;
+			$this->proses->insert_dimensi('dim_pasien', $dataDimensi['pasien']);
+		} elseif (count($data['pasien']) == count($dimensiLama['pasien'])) {
+			$dataDimensi['pasien'] = null;
 		} else {
-			foreach ($dimensiLama['penjual'] as $key => $value) {
-				if ($value['penjual_id'] == $data['penjual'][$key]['penjual_id']) {
-					unset($data['penjual'][$key]);
+			foreach ($dimensiLama['pasien'] as $key => $value) {
+				if ($value['pasien_id'] == $data['pasien'][$key]['pasien_id']) {
+					unset($data['pasien'][$key]);
 				}
 			}
-			foreach ($data['penjual'] as $key => $value) {
-				array_push($dataDimensi['penjual'], array(
-					'penjual_id' => $value['penjual_id'],
-					'penjual_tempat' => $value['penjual_tempat'],
-				));
-				$waktu = $value['penjual_time'];
-				$pecah = explode('/',$waktu);
-				array_push($dataDimensi['waktu'], array(
-					'waktu' => date('H:i:s'),
-					'waktu_hari' => $this->hari(date('l')),
-					'waktu_tanggal' => date('d'),
-					'waktu_bulan' => $pecah[1],
-					'waktu_tahun' => $pecah[2],
+			foreach ($data['pasien'] as $key => $value) {
+				array_push($dataDimensi['pasien'], array(
+					'pasien_id' => $value['pasien_id'],
+					'pasien_nama' => $value['pasien_nama'],
 				));
 			}
-			$this->proses->insert_dimensi('dim_penjual', $dataDimensi['penjual']);
-			$this->proses->insert_dimensi('dim_waktu', $dataDimensi['waktu']);
+			$this->proses->insert_dimensi('dim_pasien', $dataDimensi['pasien']);
 		}
 		//---------------------------------------------------------------------------------
-
 		if (count($data['produsen']) == 0) {
 			foreach ($data['produsen'] as $key => $value) {
 				array_push($dataDimensi['produsen'], array(
@@ -385,6 +341,79 @@ class ProsesController extends CI_Controller
 				));
 			}
 			$this->proses->insert_dimensi('dim_produsen', $dataDimensi['produsen']);
+		}
+		//---------------------------------------------------------------------------------
+		if (count($data['ruang']) == 0) {
+			foreach ($data['ruang'] as $key => $value) {
+				array_push($dataDimensi['ruang'], array(
+					'ruang_id' => $value['ruang_id'],
+					'ruang_poliklinik' => $value['ruang_poliklinik'],
+				));
+			}
+			$this->proses->insert_dimensi('dim_ruang', $dataDimensi['ruang']);
+		} elseif (count($data['ruang']) == count($dimensiLama['ruang'])) {
+			$dataDimensi['ruang'] = null;
+		} else {
+			foreach ($dimensiLama['ruang'] as $key => $value) {
+				if ($value['ruang_id'] == $data['ruang'][$key]['ruang_id']) {
+					unset($data['ruang'][$key]);
+				}
+			}
+			foreach ($data['ruang'] as $key => $value) {
+				array_push($dataDimensi['ruang'], array(
+					'ruang_id' => $value['ruang_id'],
+					'ruang_poliklinik' => $value['ruang_poliklinik'],
+				));
+			}
+			$this->proses->insert_dimensi('dim_ruang', $dataDimensi['ruang']);
+		}
+		//---------------------------------------------------------------------------------
+
+		if (count($data['transaksi']) == 0) {
+			foreach ($data['transaksi'] as $key => $value) {
+				array_push($dataDimensi['transaksi'], array(
+					'transaksi_id' => $value['transaksi_id'],
+					'transaksi_harga' => $value['transaksi_harga'],
+					'transaksi_jumlah' => $value['transaksi_jumlah'],
+					'transaksi_total' => $value['transaksi_harga'] * $value['transaksi_jumlah'],
+				));
+				$waktu = $value['transaksi_tanggal'];
+				$pecah = explode('/',$waktu);
+				array_push($dataDimensi['waktu'], array(
+					'waktu_hari' => $this->hari(date('l')),
+					'waktu_tanggal' => $pecah[0],
+					'waktu_bulan' => $pecah[1],
+					'waktu_tahun' => $pecah[2],
+				));
+			}
+			$this->proses->insert_dimensi('dim_transaksi', $dataDimensi['transaksi']);
+			$this->proses->insert_dimensi('dim_waktu', $dataDimensi['waktu']);
+		} elseif (count($data['transaksi']) == count($dimensiLama['transaksi'])) {
+			$dataDimensi['transaksi'] = null;
+		} else {
+			foreach ($dimensiLama['transaksi'] as $key => $value) {
+				if ($value['transaksi_id'] == $data['transaksi'][$key]['transaksi_id']) {
+					unset($data['transaksi'][$key]);
+				}
+			}
+			foreach ($data['transaksi'] as $key => $value) {
+				array_push($dataDimensi['transaksi'], array(
+					'transaksi_id' => $value['transaksi_id'],
+					'transaksi_harga' => $value['transaksi_harga'],
+					'transaksi_jumlah' => $value['transaksi_jumlah'],
+					'transaksi_total' => $value['transaksi_harga'] * $value['transaksi_jumlah'],
+				));
+				$waktu = $value['transaksi_tanggal'];
+				$pecah = explode('/',$waktu);
+				array_push($dataDimensi['waktu'], array(
+					'waktu_hari' => $this->hari(date('l')),
+					'waktu_tanggal' => $pecah[0],
+					'waktu_bulan' => $pecah[1],
+					'waktu_tahun' => $pecah[2],
+				));
+			}
+			$this->proses->insert_dimensi('dim_transaksi', $dataDimensi['transaksi']);
+			$this->proses->insert_dimensi('dim_waktu', $dataDimensi['waktu']);
 		}
 		//---------------------------------------------------------------------------------
 
