@@ -434,48 +434,52 @@ class ProsesController extends CI_Controller
 		$data = $this->proses->lihat('fact_penjualan');
 
 		$dataDimensi = array(
-			'golongan' => $this->proses->lihat('dim_golongan'),
-			'kategori' => $this->proses->lihat('dim_kategori'),
+			'dokter' => $this->proses->lihat('dim_dokter'),
 			'obat' => $this->proses->lihat('dim_obat'),
-			'penjual' => $this->proses->lihat('dim_penjual'),
+			'pasien' => $this->proses->lihat('dim_pasien'),
 			'produsen' => $this->proses->lihat('dim_produsen'),
+			'ruang' => $this->proses->lihat('dim_ruang'),
+			'transaksi' => $this->proses->lihat('dim_transaksi'),
 			'waktu' => $this->proses->lihat('dim_waktu'),
 		);
 
 		$dataFakta = array();
 
 		if (count($data) == 0){
-			foreach ($dataDimensi['golongan'] as $key=>$value) {
+			foreach ($dataDimensi['dokter'] as $key=>$value) {
 				array_push($dataFakta, array(
-					'id_golongan' => $value['golongan_id'],
-					'id_kategori' => $dataDimensi['kategori'][$key]['kategori_id'],
+					'id_dokter' => $value['dokter_id'],
 					'id_obat' => $dataDimensi['obat'][$key]['obat_id'],
-					'id_penjual' => $dataDimensi['penjual'][$key]['penjual_id'],
+					'id_pasien' => $dataDimensi['pasien'][$key]['pasien_id'],
 					'id_produsen' => $dataDimensi['produsen'][$key]['produsen_id'],
+					'id_ruang' => $dataDimensi['ruang'][$key]['ruang_id'],
+					'id_transaksi' => $dataDimensi['transaksi'][$key]['transaksi_id'],
 					'id_waktu' => $dataDimensi['waktu'][$key]['waktu_id'],
 				));
 			}
 			$this->proses->insert_dimensi('fact_penjualan', $dataFakta);
-		} elseif (count($data) == count($dataDimensi['golongan'])) {
+		} elseif (count($data) == count($dataDimensi['dokter'])) {
 			$dataFakta = null;
 		} else {
 			foreach ($data as $key => $value) {
-				if ($value['id_golongan'] == $dataDimensi['golongan'][$key]['golongan_id']) {
-					unset($dataDimensi['golongan'][$key]);
-					unset($dataDimensi['kategori'][$key]);
+				if ($value['id_dokter'] == $dataDimensi['dokter'][$key]['dokter_id']) {
+					unset($dataDimensi['dokter'][$key]);
 					unset($dataDimensi['obat'][$key]);
-					unset($dataDimensi['penjual'][$key]);
+					unset($dataDimensi['pasien'][$key]);
 					unset($dataDimensi['produsen'][$key]);
+					unset($dataDimensi['ruang'][$key]);
+					unset($dataDimensi['transaksi'][$key]);
 					unset($dataDimensi['waktu'][$key]);
 				}
 			}
-			foreach ($dataDimensi['golongan'] as $key=>$value) {
+			foreach ($dataDimensi['dokter'] as $key=>$value) {
 				array_push($dataFakta, array(
-					'id_golongan' => $value['golongan_id'],
-					'id_kategori' => $dataDimensi['kategori'][$key]['kategori_id'],
+					'id_dokter' => $value['dokter_id'],
 					'id_obat' => $dataDimensi['obat'][$key]['obat_id'],
-					'id_penjual' => $dataDimensi['penjual'][$key]['penjual_id'],
+					'id_pasien' => $dataDimensi['pasien'][$key]['pasien_id'],
 					'id_produsen' => $dataDimensi['produsen'][$key]['produsen_id'],
+					'id_ruang' => $dataDimensi['ruang'][$key]['ruang_id'],
+					'id_transaksi' => $dataDimensi['transaksi'][$key]['transaksi_id'],
 					'id_waktu' => $dataDimensi['waktu'][$key]['waktu_id'],
 				));
 			}

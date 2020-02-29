@@ -21,11 +21,12 @@
 						<table class="table table-bordered example1">
 							<thead>
 							<tr>
-								<th>id_golongan</th>
-								<th>id_kategori</th>
 								<th>id_obat</th>
-								<th>id_penjual</th>
 								<th>id_produsen</th>
+								<th>id_ruang</th>
+								<th>id_pasien</th>
+								<th>id_dokter</th>
+								<th>id_transaksi</th>
 								<th>id_waktu</th>
 							</tr>
 							</thead>
@@ -34,11 +35,12 @@
 							foreach($fakta as $key=>$value):
 							?>
 							<tr>
-								<td><?= $value['id_golongan'] ?></td>
-								<td><?= $value['id_kategori'] ?></td>
 								<td><?= $value['id_obat'] ?></td>
-								<td><?= $value['id_penjual'] ?></td>
 								<td><?= $value['id_produsen'] ?></td>
+								<td><?= $value['id_ruang'] ?></td>
+								<td><?= $value['id_pasien'] ?></td>
+								<td><?= $value['id_dokter'] ?></td>
+								<td><?= $value['id_transaksi'] ?></td>
 								<td><?= $value['id_waktu'] ?></td>
 							</tr>
 							<?php
