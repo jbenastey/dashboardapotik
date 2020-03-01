@@ -706,6 +706,8 @@ class ProsesController extends CI_Controller
 		$data = array(
 			'obat' => $this->proses->obat_terbanyak(),
 			'produsen' => $this->proses->produsen_terbanyak(),
+			'dokter' => $this->proses->dokter_terbanyak(),
+			'pasien' => $this->proses->pasien_terbanyak(),
 		);
 		echo json_encode($data);
 	}

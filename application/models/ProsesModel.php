@@ -142,4 +142,20 @@ class ProsesModel extends CI_Model
 		$query = $this->db->get('excel_produsen');
 		return $query->result_array();
 	}
+	public function dokter_terbanyak()
+	{
+		$this->db->select('*, count(dokter_nama) as total');
+		$this->db->group_by('dokter_nama');
+		$this->db->order_by('total','desc');
+		$query = $this->db->get('excel_dokter');
+		return $query->result_array();
+	}
+	public function pasien_terbanyak()
+	{
+		$this->db->select('*, count(pasien_nama) as total');
+		$this->db->group_by('pasien_nama');
+		$this->db->order_by('total','desc');
+		$query = $this->db->get('excel_pasien');
+		return $query->result_array();
+	}
 }

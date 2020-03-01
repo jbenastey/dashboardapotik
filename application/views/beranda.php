@@ -77,10 +77,10 @@
 		</div>
 		<br>
 		<div class="row">
-			<div class="col-lg-6 col-6">
+			<div class="col-lg-3 col-6">
 				<div class="small-box bg-warning-gradient">
 					<div class="inner">
-						<h4>&nbsp;<span id="obat-banyak"></span></h4>
+						<h5>&nbsp;<span id="obat-banyak"></span></h5>
 						<br>
 						<p>Obat Terbanyak </p>
 					</div>
@@ -91,10 +91,10 @@
 							class="fa fa-arrow-circle-down"></i></a>
 				</div>
 			</div>
-			<div class="col-lg-6 col-6">
+			<div class="col-lg-3 col-6">
 				<div class="small-box bg-danger-gradient">
 					<div class="inner">
-						<h4>&nbsp;<span id="produsen-banyak"></span></h4>
+						<h5>&nbsp;<span id="produsen-banyak"></span></h5>
 						<br>
 						<p>Produsen Terbanyak </p>
 					</div>
@@ -102,6 +102,34 @@
 						<i class="fa fa-user"></i>
 					</div>
 					<a href="#banyak" class="small-box-footer d-print-none">Lihat Data <i
+							class="fa fa-arrow-circle-down"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-6">
+				<div class="small-box bg-secondary-gradient">
+					<div class="inner">
+						<h5>&nbsp;<span id="dokter-banyak"></span></h5>
+						<br>
+						<p>Dokter Terbanyak </p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-book"></i>
+					</div>
+					<a href="#banyak2" class="small-box-footer d-print-none">Lihat Data <i
+							class="fa fa-arrow-circle-down"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-6">
+				<div class="small-box bg-success-gradient">
+					<div class="inner">
+						<h5>&nbsp;<span id="pasien-banyak"></span></h5>
+						<br>
+						<p>Pasien Terbanyak </p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-user"></i>
+					</div>
+					<a href="#banyak2" class="small-box-footer d-print-none">Lihat Data <i
 							class="fa fa-arrow-circle-down"></i></a>
 				</div>
 			</div>
@@ -148,6 +176,26 @@
 					<div class="card-body">
 						<div class="chart">
 							<canvas id="produsen-banyak-chart" height="1000"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="banyak2">
+			<div class="col-6">
+				<div class="card">
+					<div class="card-body">
+						<div class="chart">
+							<canvas id="dokter-banyak-chart" height="1000"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="card">
+					<div class="card-body">
+						<div class="chart">
+							<canvas id="pasien-banyak-chart" height="1000"></canvas>
 						</div>
 					</div>
 				</div>

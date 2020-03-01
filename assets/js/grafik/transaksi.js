@@ -419,6 +419,8 @@ $(document).ready(function () {
 
 			$('#obat-banyak').html(response.obat[0].obat_nama);
 			$('#produsen-banyak').html(response.produsen[0].produsen_nama);
+			$('#dokter-banyak').html(response.dokter[0].dokter_nama);
+			$('#pasien-banyak').html(response.pasien[0].pasien_nama);
 
 			var obat = [];
 			var jumlahObat = [];
@@ -445,6 +447,34 @@ $(document).ready(function () {
 				for (var i = 0; i < 10; i++) {
 					produsen.push(response.produsen[i].produsen_nama);
 					jumlahProdusen.push(response.produsen[i].total)
+				}
+			}
+
+			var dokter = [];
+			var jumlahDokter = [];
+			if (response.dokter.length < 10){
+				for (var i = 0; i < response.dokter.length; i++) {
+					dokter.push(response.dokter[i].dokter_nama);
+					jumlahDokter.push(response.dokter[i].total)
+				}
+			} else {
+				for (var i = 0; i < 10; i++) {
+					dokter.push(response.dokter[i].dokter_nama);
+					jumlahDokter.push(response.dokter[i].total)
+				}
+			}
+
+			var pasien = [];
+			var jumlahPasien = [];
+			if (response.pasien.length < 10){
+				for (var i = 0; i < response.pasien.length; i++) {
+					pasien.push(response.pasien[i].pasien_nama);
+					jumlahPasien.push(response.pasien[i].total)
+				}
+			} else {
+				for (var i = 0; i < 10; i++) {
+					pasien.push(response.pasien[i].pasien_nama);
+					jumlahPasien.push(response.pasien[i].total)
 				}
 			}
 			var buku_chart = $('#obat-banyak-chart');
@@ -540,6 +570,114 @@ $(document).ready(function () {
 					title: {
 						display: true,
 						text: 'Jumlah Nama Produsen Terbanyak',
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						xAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+
+			var pinjam_chart2 = $('#dokter-banyak-chart');
+			var salesChart = new Chart(pinjam_chart2, {
+				type: 'horizontalBar',
+				data: {
+					labels: dokter,
+					datasets: [
+						{
+							label: 'jumlah',
+							backgroundColor:
+								"#DEB887",
+							borderColor:
+								"#DEB887",
+							data:
+							jumlahDokter
+						}]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							obat_tahun(label);
+						}
+					}
+					,
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Jumlah Nama Dokter Terbanyak',
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						xAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+
+			var pinjam_chart2 = $('#pasien-banyak-chart');
+			var salesChart = new Chart(pinjam_chart2, {
+				type: 'horizontalBar',
+				data: {
+					labels: pasien,
+					datasets: [
+						{
+							label: 'jumlah',
+							backgroundColor:
+								"#DEB887",
+							borderColor:
+								"#DEB887",
+							data:
+							jumlahPasien
+						}]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							obat_tahun(label);
+						}
+					}
+					,
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Jumlah Nama Pasien Terbanyak',
 					},
 					legend: {
 						display: true,
