@@ -34,7 +34,7 @@
 <script src="<?= base_url ('assets/js/pages/dashboard3.js') ?>"></script>
 <script src="<?= base_url ('assets/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
 <script src="<?= base_url ('assets/plugins/datatables/dataTables.bootstrap4.min.js') ?>"></script>
-<script src="<?= base_url ('assets/js/grafik/obat.js') ?>"></script>
+<!--<script src="--><?//= base_url ('assets/js/grafik/obat.js') ?><!--"></script>-->
 <script src="<?= base_url ('assets/js/grafik/transaksi.js') ?>"></script>
 <script>
 	$(function () {

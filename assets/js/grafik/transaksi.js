@@ -328,6 +328,9 @@ $(document).ready(function () {
 						}
 					}
 				});
+			},
+			error: function (response) {
+				console.log(response.status + 'error');
 			}
 		})
 	}
@@ -335,6 +338,8 @@ $(document).ready(function () {
 	function transaksi_kategori(label,tahun,bulannya) {
 		var label = label.replace(' ','-');
 		console.log(label);
+		console.log(tahun);
+		console.log(bulannya);
 		var html2 = '';
 		$.ajax({
 			url: root + 'grafik-kategori/'+label+'/'+tahun+'/'+bulannya,
@@ -403,6 +408,9 @@ $(document).ready(function () {
 						}
 					}
 				});
+			},
+			error: function (response) {
+				console.log(response.status + 'error');
 			}
 		})
 	}

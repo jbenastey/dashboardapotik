@@ -628,13 +628,13 @@ class ProsesController extends CI_Controller
 		$non_total = 0;
 
 		foreach ($transaksi as $value) {
-			if ($value['penjual_jenis_bayar'] == 'LAINNYA') {
+			if ($value['transaksi_kelompok'] == 'LAINNYA') {
 				$lain_total++;
 			}
-			if ($value['penjual_jenis_bayar'] == 'ASKES') {
+			if ($value['transaksi_kelompok'] == 'ASKES') {
 				$askes_total++;
 			}
-			if ($value['penjual_jenis_bayar'] == 'NON ASKES') {
+			if ($value['transaksi_kelompok'] == 'NON ASKES') {
 				$non_total++;
 			}
 		}
