@@ -234,7 +234,15 @@ $(document).ready(function () {
 						'</div>' +
 						'<div class="col-6">' +
 							'<div class="chart">' +
-							'<canvas id="transaksi-chart4" width="1000" height="280"></canvas>' +
+							'<canvas id="transaksi-chart5" width="1000" height="280"></canvas>' +
+							'</div>' +
+						'</div>' +
+					'</div>' +
+					'<hr>' +
+					'<div class="row">' +
+						'<div class="col-6">' +
+							'<div class="chart">' +
+							'<canvas id="transaksi-chart6" width="1000" height="280"></canvas>' +
 							'</div>' +
 						'</div>' +
 					'</div>';
@@ -339,7 +347,7 @@ $(document).ready(function () {
 					}
 				});
 
-				var $salesChart3 = $('#transaksi-chart4');
+				var $salesChart3 = $('#transaksi-chart5');
 				var salesChart2 = new Chart($salesChart3, {
 					type: 'pie',
 					data: {
@@ -398,6 +406,53 @@ $(document).ready(function () {
 						title: {
 							display: true,
 							text: 'Berdasarkan Umur Pasien'
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						}
+					}
+				});
+
+				var $salesChart3 = $('#transaksi-chart6');
+				var salesChart2 = new Chart($salesChart3, {
+					type: 'pie',
+					data: {
+						labels: [
+							"Laki-laki",
+							"Perempuan",
+						],
+						datasets: [
+							{
+								label: 'jenis kelamin',
+								backgroundColor: [
+									"#0000de",
+									"#ff00ff",
+								],
+								borderColor: [
+									"#0000de",
+									"#ff00ff",
+								],
+								data: [
+									response.laki,
+									response.perempuan,
+								]
+							}]
+
+					},
+					options: {
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						title: {
+							display: true,
+							text: 'Berdasarkan Jenis Kelamin Pasien'
 						},
 						legend: {
 							display: true,

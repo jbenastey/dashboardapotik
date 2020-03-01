@@ -635,6 +635,9 @@ class ProsesController extends CI_Controller
 		$lansia = 0;
 		$lansia2 = 0;
 
+		$laki = 0;
+		$perempuan = 0;
+
 		foreach ($transaksi as $value) {
 			if ($value['transaksi_kelompok'] == 'LAINNYA') {
 				$lain_total++;
@@ -650,8 +653,6 @@ class ProsesController extends CI_Controller
 			$umur = $value['pasien_umur'];
 			$umur = explode(' ',$umur);
 			$umur = $umur[0];
-//			var_dump($umur);
-
 
 			if ($umur > 0 && $umur <= 5){
 				$balita++;
@@ -674,6 +675,15 @@ class ProsesController extends CI_Controller
 			if ($umur > 65){
 				$lansia2++;
 			}
+
+			//jenis kelamin
+//			var_dump(trim($value['pasien_jenis_kelamin']));
+			if (trim($value['pasien_jenis_kelamin']) == 'LAKI-LAKI'){
+				$laki++;
+			}
+			if (trim($value['pasien_jenis_kelamin']) == 'PEREMPUAN'){
+				$perempuan++;
+			}
 		}
 
 		$data = array(
@@ -687,6 +697,8 @@ class ProsesController extends CI_Controller
 			'dewasa2' => $dewasa2,
 			'lansia' => $lansia,
 			'lansia2' => $lansia2,
+			'laki' => $laki,
+			'perempuan' => $perempuan,
 		);
 		echo json_encode($data);
 	}
