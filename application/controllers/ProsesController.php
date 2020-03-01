@@ -627,6 +627,14 @@ class ProsesController extends CI_Controller
 
 		$non_total = 0;
 
+		$balita = 0;
+		$kanak = 0;
+		$remaja = 0;
+		$dewasa = 0;
+		$dewasa2 = 0;
+		$lansia = 0;
+		$lansia2 = 0;
+
 		foreach ($transaksi as $value) {
 			if ($value['transaksi_kelompok'] == 'LAINNYA') {
 				$lain_total++;
@@ -637,14 +645,48 @@ class ProsesController extends CI_Controller
 			if ($value['transaksi_kelompok'] == 'NON ASKES') {
 				$non_total++;
 			}
+
+			//umur
+			$umur = $value['pasien_umur'];
+			$umur = explode(' ',$umur);
+			$umur = $umur[0];
+//			var_dump($umur);
+
+
+			if ($umur > 0 && $umur <= 5){
+				$balita++;
+			}
+			if ($umur > 5 && $umur <= 11){
+				$kanak++;
+			}
+			if ($umur > 11 && $umur <= 20){
+				$remaja++;
+			}
+			if ($umur > 20 && $umur <= 35){
+				$dewasa++;
+			}
+			if ($umur > 35 && $umur <= 50){
+				$dewasa2++;
+			}
+			if ($umur > 50 && $umur <= 65){
+				$lansia++;
+			}
+			if ($umur > 65){
+				$lansia2++;
+			}
 		}
 
 		$data = array(
 			'lain_total' => $lain_total,
-
 			'askes_total' => $askes_total,
-
 			'non_total' => $non_total,
+			'kanak' => $kanak,
+			'balita' => $balita,
+			'remaja' => $remaja,
+			'dewasa' => $dewasa,
+			'dewasa2' => $dewasa2,
+			'lansia' => $lansia,
+			'lansia2' => $lansia2,
 		);
 		echo json_encode($data);
 	}

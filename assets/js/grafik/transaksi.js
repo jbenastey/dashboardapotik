@@ -226,8 +226,17 @@ $(document).ready(function () {
 					'<div class="chart">' +
 					'<canvas id="transaksi-chart2" width="1000" height="280"></canvas>' +
 					'</div><hr>' +
-					'<div class="chart">' +
-					'<canvas id="transaksi-chart3" width="1000" height="280"></canvas>' +
+					'<div class="row">' +
+						'<div class="col-6">' +
+							'<div class="chart">' +
+							'<canvas id="transaksi-chart3" width="1000" height="280"></canvas>' +
+							'</div>' +
+						'</div>' +
+						'<div class="col-6">' +
+							'<div class="chart">' +
+							'<canvas id="transaksi-chart4" width="1000" height="280"></canvas>' +
+							'</div>' +
+						'</div>' +
 					'</div>';
 				$('#transaksi-detail').html(html);
 
@@ -284,6 +293,7 @@ $(document).ready(function () {
 					}
 					}
 				});
+
 				var $salesChart3 = $('#transaksi-chart3');
 				var salesChart2 = new Chart($salesChart3, {
 					type: 'pie',
@@ -321,6 +331,73 @@ $(document).ready(function () {
 						title: {
 							display: true,
 							text: 'Berdasarkan bentuk'
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						}
+					}
+				});
+
+				var $salesChart3 = $('#transaksi-chart4');
+				var salesChart2 = new Chart($salesChart3, {
+					type: 'pie',
+					data: {
+						labels: [
+							"0 - 5 Tahun",
+							"6 - 11 Tahun",
+							"12 - 20 Tahun",
+							"21 - 35 Tahun",
+							"35 - 50 Tahun",
+							"51 - 65 Tahun",
+							"65 Tahun Keatas",
+						],
+						datasets: [
+							{
+								label: 'umur',
+								backgroundColor: [
+									"#DEB887",
+									"#A9A9A9",
+									"#DC143C",
+									"#88de00",
+									"#0972a9",
+									"#dc18b7",
+									"#ff6b00",
+								],
+								borderColor: [
+									"#DEB887",
+									"#A9A9A9",
+									"#DC143C",
+									"#88de00",
+									"#0972a9",
+									"#dc18b7",
+									"#ff6b00",
+								],
+								data: [
+									response.kanak,
+									response.balita,
+									response.remaja,
+									response.dewasa,
+									response.dewasa2,
+									response.lansia,
+									response.lansia2,
+								]
+							}]
+
+					},
+					options: {
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						title: {
+							display: true,
+							text: 'Berdasarkan Umur Pasien'
 						},
 						legend: {
 							display: true,
