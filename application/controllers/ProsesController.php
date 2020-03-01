@@ -638,6 +638,12 @@ class ProsesController extends CI_Controller
 		$laki = 0;
 		$perempuan = 0;
 
+		$bpjspbi = 0;
+		$bpjsnonpbi = 0;
+		$jamkesda = 0;
+		$sendiri = 0;
+		$kemenkes = 0;
+
 		foreach ($transaksi as $value) {
 			if ($value['transaksi_kelompok'] == 'LAINNYA') {
 				$lain_total++;
@@ -684,12 +690,30 @@ class ProsesController extends CI_Controller
 			if (trim($value['pasien_jenis_kelamin']) == 'PEREMPUAN'){
 				$perempuan++;
 			}
+
+			//cara bayar
+			if(strpos($value['transaksi_cara_bayar'], 'JAMKESDA') !== false){
+				$jamkesda++;
+			}
+			if($value['transaksi_cara_bayar'] == 'BPJS PBI'){
+				$bpjspbi++;
+			}
+			if($value['transaksi_cara_bayar'] == 'BPJS NON PBI'){
+				$bpjsnonpbi++;
+			}
+			if($value['transaksi_cara_bayar'] == 'BAYAR SENDIRI'){
+				$sendiri++;
+			}
+			if($value['transaksi_cara_bayar'] == 'KEMENKES RI'){
+				$kemenkes++;
+			}
 		}
 
 		$data = array(
 			'lain_total' => $lain_total,
 			'askes_total' => $askes_total,
 			'non_total' => $non_total,
+
 			'kanak' => $kanak,
 			'balita' => $balita,
 			'remaja' => $remaja,
@@ -697,8 +721,15 @@ class ProsesController extends CI_Controller
 			'dewasa2' => $dewasa2,
 			'lansia' => $lansia,
 			'lansia2' => $lansia2,
+
 			'laki' => $laki,
 			'perempuan' => $perempuan,
+
+			'bpjspbi' => $bpjspbi,
+			'bpjsnonpbi' => $bpjsnonpbi,
+			'jamkesda' => $jamkesda,
+			'sendiri' => $sendiri,
+			'kemenkes' => $kemenkes,
 		);
 		echo json_encode($data);
 	}

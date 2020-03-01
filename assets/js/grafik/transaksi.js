@@ -245,6 +245,11 @@ $(document).ready(function () {
 							'<canvas id="transaksi-chart6" width="1000" height="280"></canvas>' +
 							'</div>' +
 						'</div>' +
+						'<div class="col-6">' +
+							'<div class="chart">' +
+							'<canvas id="transaksi-chart7" width="1000" height="280"></canvas>' +
+							'</div>' +
+						'</div>' +
 					'</div>';
 				$('#transaksi-detail').html(html);
 
@@ -453,6 +458,65 @@ $(document).ready(function () {
 						title: {
 							display: true,
 							text: 'Berdasarkan Jenis Kelamin Pasien'
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						}
+					}
+				});
+
+				var $salesChart3 = $('#transaksi-chart7');
+				var salesChart2 = new Chart($salesChart3, {
+					type: 'pie',
+					data: {
+						labels: [
+							"BPJS PBI",
+							"BPJS NON PBI",
+							"JAMKESDA",
+							"Bayar Sendiri",
+							"KEMENKES RI",
+						],
+						datasets: [
+							{
+								label: 'cara bayar',
+								backgroundColor: [
+									"#DEB887",
+									"#A9A9A9",
+									"#DC143C",
+									"#88de00",
+									"#0972a9",
+								],
+								borderColor: [
+									"#DEB887",
+									"#A9A9A9",
+									"#DC143C",
+									"#88de00",
+									"#0972a9",
+								],
+								data: [
+									response.bpjspbi,
+									response.bpjsnonpbi,
+									response.jamkesda,
+									response.sendiri,
+									response.kemenkes,
+								]
+							}]
+
+					},
+					options: {
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						title: {
+							display: true,
+							text: 'Berdasarkan Cara Pembayaran Pasien'
 						},
 						legend: {
 							display: true,
