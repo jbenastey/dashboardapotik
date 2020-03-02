@@ -788,11 +788,21 @@ class ProsesController extends CI_Controller
 	}
 
 	public function terbanyak(){
+		$obat = $this->proses->obat_termahal();
+		$harga = array();
+		foreach ($obat as $item) {
+			array_push($harga,array(
+				'transaksi_harga' => $item['transaksi_harga'],
+				'obat_nama' => $item['obat_nama'],
+			));
+		}
+		rsort($harga);
 		$data = array(
 			'obat' => $this->proses->obat_terbanyak(),
 			'produsen' => $this->proses->produsen_terbanyak(),
 			'dokter' => $this->proses->dokter_terbanyak(),
 			'pasien' => $this->proses->pasien_terbanyak(),
+			'mahal' => $harga,
 		);
 		echo json_encode($data);
 	}
