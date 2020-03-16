@@ -88,6 +88,7 @@ $route['grafik-tahun'] = 'ProsesController/grafik_tahun';
 $route['data-grafik/(:any)/(:any)'] = 'ProsesController/datagrafik/$1/$2';
 $route['grafik-kategori/(:any)/(:any)/(:any)'] = 'ProsesController/grafik_kategori/$1/$2/$3';
 $route['grafik-bulan/(:any)'] = 'ProsesController/grafik_bulan/$1';
+$route['hapus/(:any)'] = 'ProsesController/hapus/$1';
 
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';

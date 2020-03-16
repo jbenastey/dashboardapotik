@@ -37,6 +37,7 @@
 										<th>Golongan Obat</th>
 										<th>Bentuk Obat</th>
 										<th>Depo Farmasi</th>
+										<th><i class="fa fa-gears"></i></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -51,6 +52,11 @@
 										<td><?= $value['obat_golongan'] ?></td>
 										<td><?= $value['obat_bentuk'] ?></td>
 										<td><?= $value['obat_depo'] ?></td>
+										<td>
+											<a href="<?= base_url('hapus/'.$value['obat_id']) ?>" title="Hapus" onclick="return confirm('Hapus Data ?')" class="btn btn-sm btn-danger">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
 									</tr>
 									<?php
 									$no++;

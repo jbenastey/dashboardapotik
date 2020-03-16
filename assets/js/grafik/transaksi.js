@@ -343,7 +343,7 @@ $(document).ready(function () {
 						},
 						title: {
 							display: true,
-							text: 'Berdasarkan bentuk'
+							text: 'Berdasarkan Transaksi'
 						},
 						legend: {
 							display: true,

@@ -806,4 +806,30 @@ class ProsesController extends CI_Controller
 		);
 		echo json_encode($data);
 	}
+
+	public function hapus($id){
+
+		$excel = $this->proses->lihat('excel_obat');
+		$dimensi = $this->proses->lihat('dim_obat');
+
+		if (count($excel) == count($dimensi)){
+			$this->proses->hapus('excel_obat',$id,'obat_id');
+			$this->proses->hapus('excel_dokter',$id,'dokter_id');
+			$this->proses->hapus('excel_pasien',$id,'pasien_id');
+			$this->proses->hapus('excel_produsen',$id,'produsen_id');
+			$this->proses->hapus('excel_ruang',$id,'ruang_id');
+			$this->proses->hapus('excel_transaksi',$id,'transaksi_id');
+			$this->proses->hapus('dim_obat',$id,'obat_id');
+			$this->proses->hapus('dim_dokter',$id,'dokter_id');
+			$this->proses->hapus('dim_pasien',$id,'pasien_id');
+			$this->proses->hapus('dim_produsen',$id,'produsen_id');
+			$this->proses->hapus('dim_ruang',$id,'ruang_id');
+			$this->proses->hapus('dim_transaksi',$id,'transaksi_id');
+			$this->proses->hapus('dim_waktu',$id,'waktu_id');
+			$this->proses->hapus('fact_penjualan',$id,'id_obat');
+			redirect('mentah');
+		} else {
+			redirect('mentah');
+		}
+	}
 }

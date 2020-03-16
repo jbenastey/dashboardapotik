@@ -171,4 +171,10 @@ class ProsesModel extends CI_Model
 		$query = $this->db->get('fact_penjualan');
 		return $query->result_array();
 	}
+
+	public function hapus($table,$id,$key){
+		$this->db->where($key,$id);
+		$this->db->delete($table);
+	}
+
 }
