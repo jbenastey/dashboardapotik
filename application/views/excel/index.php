@@ -23,6 +23,7 @@
 							<li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab">Pasien</a></li>
 							<li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab">Dokter</a></li>
 							<li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab">Transaksi</a></li>
+							<li class="nav-item"><a class="nav-link btn btn-danger text-white btn-sm" href="<?= base_url('hapus-semua') ?>" onclick="return confirm('Hapus semua data?')">Hapus Semua Data</a></li>
 						</ul>
 					</div><!-- /.card-header -->
 					<div class="card-body">

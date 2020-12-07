@@ -177,4 +177,8 @@ class ProsesModel extends CI_Model
 		$this->db->delete($table);
 	}
 
+	public function hapus_semua($table){
+		$this->db->empty_table($table);
+	}
+
 }

@@ -832,4 +832,22 @@ class ProsesController extends CI_Controller
 			redirect('mentah');
 		}
 	}
+
+	public function hapusSemua(){
+		$this->proses->hapus_semua('excel_obat');
+		$this->proses->hapus_semua('excel_dokter');
+		$this->proses->hapus_semua('excel_pasien');
+		$this->proses->hapus_semua('excel_produsen');
+		$this->proses->hapus_semua('excel_ruang');
+		$this->proses->hapus_semua('excel_transaksi');
+		$this->proses->hapus_semua('dim_obat');
+		$this->proses->hapus_semua('dim_dokter');
+		$this->proses->hapus_semua('dim_pasien');
+		$this->proses->hapus_semua('dim_produsen');
+		$this->proses->hapus_semua('dim_ruang');
+		$this->proses->hapus_semua('dim_transaksi');
+		$this->proses->hapus_semua('dim_waktu');
+		$this->proses->hapus_semua('fact_penjualan');
+		redirect('mentah');
+	}
 }
