@@ -111,6 +111,12 @@ to get the desired effect
 					<p>Laporan</p>
 				</a>
 			</li>
+			<li class="nav-item">
+				<a href="<?=base_url('grafik')?>" class="nav-link <?php if ($this->uri->segment('1') == 'grafik') echo 'active'?>">
+					<i class="nav-icon fa fa-bar-chart"></i>
+					<p>Grafik</p>
+				</a>
+			</li>
           
         </ul>
       </nav>

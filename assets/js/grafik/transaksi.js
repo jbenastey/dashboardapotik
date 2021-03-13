@@ -212,6 +212,7 @@ $(document).ready(function () {
 		console.log(tahun);
 		console.log(bulan);
 		var bulannya = angkaBulan(bulan);
+		console.log(bulannya);
 		var html = '';
 		$.ajax({
 			url: root + 'data-grafik/' + tahun + '/' + bulannya,
@@ -548,7 +549,7 @@ $(document).ready(function () {
 				html2 += '' +
 					'<h3>Grafik Transaksi Kategori '+label+'</h3>' +
 					'<div class="chart">' +
-					'<canvas id="transaksi-chart4" width="1000" height="1000"></canvas>' +
+					'<canvas id="transaksi-chart4" width="1000" height="1500"></canvas>' +
 					'</div>';
 				$('#transaksi-detail2').html(html2);
 
@@ -624,6 +625,7 @@ $(document).ready(function () {
 			$('#produsen-banyak').html(response.produsen[0].produsen_nama);
 			$('#dokter-banyak').html(response.dokter[0].dokter_nama);
 			$('#pasien-banyak').html(response.pasien[0].pasien_nama);
+			$('#poliklinik-banyak').html(response.poliklinik[0].ruang_poliklinik);
 
 			var obat = [];
 			var jumlahObat = [];
@@ -650,6 +652,20 @@ $(document).ready(function () {
 				for (var i = 0; i < 10; i++) {
 					produsen.push(response.produsen[i].produsen_nama);
 					jumlahProdusen.push(response.produsen[i].total)
+				}
+			}
+
+			var poliklinik = [];
+			var jumlahPoliklinik = [];
+			if (response.poliklinik.length < 10){
+				for (var i = 0; i < response.poliklinik.length; i++) {
+					poliklinik.push(response.poliklinik[i].ruang_poliklinik);
+					jumlahPoliklinik.push(response.poliklinik[i].total)
+				}
+			} else {
+				for (var i = 0; i < 10; i++) {
+					poliklinik.push(response.poliklinik[i].ruang_poliklinik);
+					jumlahPoliklinik.push(response.poliklinik[i].total)
 				}
 			}
 
@@ -787,6 +803,60 @@ $(document).ready(function () {
 					title: {
 						display: true,
 						text: 'Jumlah Nama Produsen Terbanyak',
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						xAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+
+			var pinjam_chart = $('#poliklinik-banyak-chart');
+			var salesChart = new Chart(pinjam_chart, {
+				type: 'horizontalBar',
+				data: {
+					labels: poliklinik,
+					datasets: [
+						{
+							label: 'jumlah',
+							backgroundColor:
+								"#DEB887",
+							borderColor:
+								"#DEB887",
+							data:
+							jumlahPoliklinik
+						}]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							obat_tahun(label);
+						}
+					}
+					,
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Jumlah Nama Poliklinik Terbanyak',
 					},
 					legend: {
 						display: true,
@@ -970,23 +1040,23 @@ $(document).ready(function () {
 
 function angkaBulan(bulan) {
 	if (bulan === 'Januari'){
-		return '01';
+		return '1';
 	}else if (bulan === 'Februari'){
-		return '02';
+		return '2';
 	}else if (bulan === 'Maret'){
-		return '03';
+		return '3';
 	}else if (bulan === 'April'){
-		return '04';
+		return '4';
 	}else if (bulan === 'Mei'){
-		return '05';
+		return '5';
 	}else if (bulan === 'Juni'){
-		return '06';
+		return '6';
 	}else if (bulan === 'Juli'){
-		return '07';
+		return '7';
 	}else if (bulan === 'Agustus'){
-		return '08';
+		return '8';
 	}else if (bulan === 'September'){
-		return '09';
+		return '9';
 	}else if (bulan === 'Oktober'){
 		return '10';
 	}else if (bulan === 'November'){

@@ -93,3 +93,5 @@ $route['hapus-semua'] = 'ProsesController/hapusSemua';
 
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';
+
+$route['grafik'] = 'welcome/grafik';

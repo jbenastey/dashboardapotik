@@ -35,11 +35,13 @@ class ProsesController extends CI_Controller
 					// Jadi dilewat saja, tidak usah diimport
 					if ($numrow > 1) {
 						// Kita push (add) array data ke variabel data
-						array_push($data, array(
-							'pasien_nama' => $row['A'],
-							'pasien_jenis_kelamin' => $row['B'],
-							'pasien_umur' => $row['C'],
-						));
+						if ($row['A'] != ''){
+							array_push($data, array(
+								'pasien_nama' => $row['A'],
+								'pasien_jenis_kelamin' => $row['B'],
+								'pasien_umur' => $row['C'],
+							));
+						}
 					}
 
 					$numrow++; // Tambah 1 setiap kali looping
@@ -59,10 +61,12 @@ class ProsesController extends CI_Controller
 					// Jadi dilewat saja, tidak usah diimport
 					if ($numrow > 1) {
 						// Kita push (add) array data ke variabel data
-						array_push($data, array(
-							'ruang_poliklinik' => $row['A'],
-							'ruang_jenis_masuk' => $row['B'],
-						));
+						if ($row['A'] != ''){
+							array_push($data, array(
+								'ruang_poliklinik' => $row['A'],
+								'ruang_jenis_masuk' => $row['B'],
+							));
+						}
 					}
 
 					$numrow++; // Tambah 1 setiap kali looping
@@ -82,9 +86,11 @@ class ProsesController extends CI_Controller
 					// Jadi dilewat saja, tidak usah diimport
 					if ($numrow > 1) {
 						// Kita push (add) array data ke variabel data
-						array_push($data, array(
-							'dokter_nama' => $row['A'],
-						));
+						if ($row['A'] != ''){
+							array_push($data, array(
+								'dokter_nama' => $row['A'],
+							));
+						}
 					}
 
 					$numrow++; // Tambah 1 setiap kali looping
@@ -104,9 +110,11 @@ class ProsesController extends CI_Controller
 					// Jadi dilewat saja, tidak usah diimport
 					if ($numrow > 1) {
 						// Kita push (add) array data ke variabel data
-						array_push($data, array(
-							'produsen_nama' => $row['A'],
-						));
+						if ($row['A'] != ''){
+							array_push($data, array(
+								'produsen_nama' => $row['A'],
+							));
+						}
 					}
 
 					$numrow++; // Tambah 1 setiap kali looping
@@ -126,13 +134,15 @@ class ProsesController extends CI_Controller
 					// Jadi dilewat saja, tidak usah diimport
 					if ($numrow > 1) {
 						// Kita push (add) array data ke variabel data
-						array_push($data, array(
-							'obat_kode' => $row['A'],
-							'obat_nama' => $row['B'],
-							'obat_golongan' => $row['C'],
-							'obat_bentuk' => $row['D'],
-							'obat_depo' => $row['E'],
-						));
+						if ($row['A'] != ''){
+							array_push($data, array(
+								'obat_kode' => $row['A'],
+								'obat_nama' => $row['B'],
+								'obat_golongan' => $row['C'],
+								'obat_bentuk' => $row['D'],
+								'obat_depo' => $row['E'],
+							));
+						}
 					}
 
 					$numrow++; // Tambah 1 setiap kali looping
@@ -158,14 +168,15 @@ class ProsesController extends CI_Controller
 						$bulan = explode('/',$tanggal[0]);
 						$tgl = $bulan[1].'/'.$bulan[0].'/'.$bulan[2];
 //						var_dump($tgl);
-
-						array_push($data, array(
-							'transaksi_kelompok' => $row['A'],
-							'transaksi_harga' => $row['B'],
-							'transaksi_jumlah' => $row['C'],
-							'transaksi_cara_bayar' => $row['D'],
-							'transaksi_tanggal' => $tgl,
-						));
+						if ($row['A'] != ''){
+							array_push($data, array(
+								'transaksi_kelompok' => $row['A'],
+								'transaksi_harga' => $row['B'],
+								'transaksi_jumlah' => $row['C'],
+								'transaksi_cara_bayar' => $row['D'],
+								'transaksi_tanggal' => $tgl,
+							));
+						}
 					}
 
 					$numrow++; // Tambah 1 setiap kali looping
@@ -802,6 +813,7 @@ class ProsesController extends CI_Controller
 			'produsen' => $this->proses->produsen_terbanyak(),
 			'dokter' => $this->proses->dokter_terbanyak(),
 			'pasien' => $this->proses->pasien_terbanyak(),
+			'poliklinik' => $this->proses->poliklinik_terbanyak(),
 			'mahal' => $harga,
 		);
 		echo json_encode($data);

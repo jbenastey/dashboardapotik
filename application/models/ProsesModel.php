@@ -161,6 +161,14 @@ class ProsesModel extends CI_Model
 		$query = $this->db->get('excel_pasien');
 		return $query->result_array();
 	}
+	public function poliklinik_terbanyak()
+	{
+		$this->db->select('*, count(ruang_poliklinik) as total');
+		$this->db->group_by('ruang_poliklinik');
+		$this->db->order_by('total','desc');
+		$query = $this->db->get('excel_ruang');
+		return $query->result_array();
+	}
 	public function obat_termahal()
 	{
 		$this->db->select('*, count(obat_nama) as total');

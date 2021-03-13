@@ -33,4 +33,9 @@ class Welcome extends CI_Controller
 		$this->load->view('template/footer');
 	}
 
+	public function grafik(){
+		$this->load->view('template/header');
+		$this->load->view('grafik');
+		$this->load->view('template/footer');
+	}
 }
