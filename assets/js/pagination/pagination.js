@@ -107,4 +107,84 @@ $(document).ready(function(){
 			{ data: 'transaksi_tanggal' },
 		]
 	});
+
+	$('#dt-dimensi-dokter').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-dimensi-dokter'
+		},
+		'columns': [
+			{ data: 'dokter_id' },
+			{ data: 'dokter_nama' },
+		]
+	});
+
+	$('#dt-dimensi-obat').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-dimensi-obat'
+		},
+		'columns': [
+			{ data: 'obat_id' },
+			{ data: 'obat_nama' },
+		]
+	});
+
+	$('#dt-dimensi-pasien').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-dimensi-pasien'
+		},
+		'columns': [
+			{ data: 'pasien_id' },
+			{ data: 'pasien_nama' },
+		]
+	});
+
+	$('#dt-dimensi-produsen').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-dimensi-produsen'
+		},
+		'columns': [
+			{ data: 'produsen_id' },
+			{ data: 'produsen_nama' },
+		]
+	});
+
+	$('#dt-dimensi-ruang').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-dimensi-ruang'
+		},
+		'columns': [
+			{ data: 'ruang_id' },
+			{ data: 'ruang_poliklinik' },
+		]
+	});
+
+	$('#dt-dimensi-transaksi').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-dimensi-transaksi'
+		},
+		'columns': [
+			{ data: 'transaksi_id' },
+			{ data: 'transaksi_harga' },
+			{ data: 'transaksi_jumlah' },
+			{ data: 'transaksi_total' },
+		]
+	});
 });

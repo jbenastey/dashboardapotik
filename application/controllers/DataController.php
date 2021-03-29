@@ -85,4 +85,75 @@ class DataController extends CI_Controller
 
 		echo json_encode($data);
 	}
+
+	public function dimensiDokter(){
+
+		// POST data
+		$postData = $this->input->post();
+
+		// Get data
+		$data = $this->DataModel->getDimensiDokter($postData);
+
+		echo json_encode($data);
+	}
+	public function dimensiObat(){
+
+		// POST data
+		$postData = $this->input->post();
+
+		// Get data
+		$data = $this->DataModel->getDimensiObat($postData);
+
+		echo json_encode($data);
+	}
+	public function dimensiPasien(){
+
+		// POST data
+		$postData = $this->input->post();
+
+		// Get data
+		$data = $this->DataModel->getDimensiPasien($postData);
+
+		echo json_encode($data);
+	}
+	public function dimensiProdusen(){
+
+		// POST data
+		$postData = $this->input->post();
+
+		// Get data
+		$data = $this->DataModel->getDimensiProdusen($postData);
+
+		echo json_encode($data);
+	}
+	public function dimensiRuang(){
+
+		// POST data
+		$postData = $this->input->post();
+
+		// Get data
+		$data = $this->DataModel->getDimensiRuang($postData);
+
+		echo json_encode($data);
+	}
+	public function dimensiTransaksi(){
+
+		// POST data
+		$postData = $this->input->post();
+
+		// Get data
+		$data = $this->DataModel->getDimensiTransaksi($postData);
+
+		echo json_encode($data);
+	}
+	public function dimensiWaktu(){
+
+		// POST data
+		$postData = $this->input->post();
+
+		// Get data
+		$data = $this->DataModel->getDimensiWaktu($postData);
+
+		echo json_encode($data);
+	}
 }

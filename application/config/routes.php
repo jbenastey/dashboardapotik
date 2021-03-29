@@ -104,3 +104,11 @@ $route['data-excel-pasien'] = 'DataController/excelPasien';
 $route['data-excel-produsen'] = 'DataController/excelProdusen';
 $route['data-excel-ruang'] = 'DataController/excelRuang';
 $route['data-excel-transaksi'] = 'DataController/excelTransaksi';
+
+$route['data-dimensi-dokter'] = 'DataController/dimensiDokter';
+$route['data-dimensi-obat'] = 'DataController/dimensiObat';
+$route['data-dimensi-pasien'] = 'DataController/dimensiPasien';
+$route['data-dimensi-produsen'] = 'DataController/dimensiProdusen';
+$route['data-dimensi-ruang'] = 'DataController/dimensiRuang';
+$route['data-dimensi-transaksi'] = 'DataController/dimensiTransaksi';
+$route['data-dimensi-waktu'] = 'DataController/dimensiWaktu';

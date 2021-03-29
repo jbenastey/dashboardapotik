@@ -445,4 +445,430 @@ class DataModel extends CI_Model
 
 		return $response;
 	}
+
+	function getDimensiDokter($postData=null){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (dokter_id like '%".$searchValue."%' or dokter_nama like '%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$records = $this->db->get('dim_dokter')->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$records = $this->db->get('dim_dokter')->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$records = $this->db->get('dim_dokter')->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"dokter_id"=>$record->dokter_id,
+				"dokter_nama"=>$record->dokter_nama,
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getDimensiObat($postData=null){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (obat_id like '%".$searchValue."%' or obat_kode like '%".$searchValue."%' or obat_nama like'%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$records = $this->db->get('dim_obat')->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$records = $this->db->get('dim_obat')->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$records = $this->db->get('dim_obat')->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"obat_id"=>$record->obat_id,
+				"obat_kode"=>$record->obat_kode,
+				"obat_nama"=>$record->obat_nama,
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getDimensiPasien($postData=null){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (pasien_id like '%".$searchValue."%' or pasien_nama like '%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$records = $this->db->get('dim_pasien')->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$records = $this->db->get('dim_pasien')->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$records = $this->db->get('dim_pasien')->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"pasien_id"=>$record->pasien_id,
+				"pasien_nama"=>$record->pasien_nama,
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getDimensiProdusen($postData=null){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (produsen_id like '%".$searchValue."%' or produsen_nama like '%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$records = $this->db->get('dim_produsen')->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$records = $this->db->get('dim_produsen')->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$records = $this->db->get('dim_produsen')->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"produsen_id"=>$record->produsen_id,
+				"produsen_nama"=>$record->produsen_nama,
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getDimensiRuang($postData=null){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (ruang_id like '%".$searchValue."%' or ruang_poliklinik like '%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$records = $this->db->get('dim_ruang')->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$records = $this->db->get('dim_ruang')->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$records = $this->db->get('dim_ruang')->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"ruang_id"=>$record->ruang_id,
+				"ruang_poliklinik"=>$record->ruang_poliklinik,
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getDimensiTransaksi($postData=null){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (transaksi_id like '%".$searchValue."%' or transaksi_harga like'%".$searchValue."%' or transaksi_jumlah like'%".$searchValue."%' or transaksi_total like'%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$records = $this->db->get('dim_transaksi')->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$records = $this->db->get('dim_transaksi')->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$records = $this->db->get('dim_transaksi')->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"transaksi_id"=>$record->transaksi_id,
+				"transaksi_harga"=>$record->transaksi_harga,
+				"transaksi_jumlah"=>$record->transaksi_jumlah,
+				"transaksi_total"=>$record->transaksi_total,
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getDimensiWaktu($postData=null){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (waktu_id like '%".$searchValue."%' or waktu_hari like'%".$searchValue."%' or waktu_tanggal like'%".$searchValue."%' or waktu_bulan like'%".$searchValue."%' or waktu_tahun like'%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$records = $this->db->get('dim_transaksi')->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$records = $this->db->get('dim_transaksi')->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$records = $this->db->get('dim_transaksi')->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"waktu_id"=>$record->waktu_id,
+				"waktu_hari"=>$record->waktu_hari,
+				"waktu_tanggal"=>$record->waktu_tanggal,
+				"waktu_bulan"=>$record->waktu_bulan,
+				"waktu_tahun"=>$record->waktu_tahun,
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
 }

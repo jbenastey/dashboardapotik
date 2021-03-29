@@ -29,122 +29,62 @@
 					<div class="card-body">
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped" style="width: 100%" id="dt-dimensi-obat">
 									<thead class="text-center">
 									<tr>
 										<th>obat_id</th>
 										<th>obat_nama</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($obat as $key=>$value):
-									?>
-									<tr>
-										<td><?= $value['obat_id'] ?></td>
-										<td><?= $value['obat_nama'] ?></td>
-									</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_2">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped" style="width: 100%" id="dt-dimensi-produsen">
 									<thead class="text-center">
 									<tr>
 										<th>produsen_id</th>
 										<th>produsen_nama</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($produsen as $key=>$value):
-										?>
-										<tr>
-											<td><?= $value['produsen_id'] ?></td>
-											<td><?= $value['produsen_nama'] ?></td>
-										</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_3">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped"  style="width: 100%" id="dt-dimensi-ruang">
 									<thead class="text-center">
 									<tr>
 										<th>ruang_id</th>
 										<th>ruang_poliklinik</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($ruang as $key=>$value):
-										?>
-										<tr>
-											<td><?= $value['ruang_id'] ?></td>
-											<td><?= $value['ruang_poliklinik'] ?></td>
-										</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_4">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped" style="width: 100%" id="dt-dimensi-pasien">
 									<thead class="text-center">
 									<tr>
 										<th>pasien_id</th>
 										<th>pasien_nama</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($pasien as $key=>$value):
-										?>
-										<tr>
-											<td><?= $value['pasien_id'] ?></td>
-											<td><?= $value['pasien_nama'] ?></td>
-										</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_5">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped"  style="width: 100%" id="dt-dimensi-dokter">
 									<thead class="text-center">
 									<tr>
 										<th>dokter_id</th>
 										<th>dokter_nama</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($dokter as $key=>$value):
-										?>
-										<tr>
-											<td><?= $value['dokter_id'] ?></td>
-											<td><?= $value['dokter_nama'] ?></td>
-										</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_6">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped"  style="width: 100%" id="dt-dimensi-transaksi">
 									<thead class="text-center">
 									<tr>
 										<th>transaksi_id</th>
@@ -153,25 +93,11 @@
 										<th>transaksi_total</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($transaksi as $key=>$value):
-										?>
-										<tr>
-											<td><?= $value['transaksi_id'] ?></td>
-											<td><?= $value['transaksi_harga'] ?></td>
-											<td><?= $value['transaksi_jumlah'] ?></td>
-											<td><?= $value['transaksi_total'] ?></td>
-										</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_7">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped"  style="width: 100%" id="dt-dimensi-waktu">
 									<thead class="text-center">
 									<tr>
 										<th>waktu_id</th>
@@ -181,21 +107,6 @@
 										<th>waktu_tahun</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($waktu as $key=>$value):
-										?>
-										<tr>
-											<td><?= $value['waktu_id'] ?></td>
-											<td><?= $value['waktu_hari'] ?></td>
-											<td><?= $value['waktu_tanggal'] ?></td>
-											<td><?= $value['waktu_bulan'] ?></td>
-											<td><?= $value['waktu_tahun'] ?></td>
-										</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
