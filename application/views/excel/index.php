@@ -29,7 +29,7 @@
 					<div class="card-body">
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped" style="width: 100%"  id="dt-excel-obat">
 									<thead class="text-center">
 									<tr>
 										<th>No</th>
@@ -38,62 +38,24 @@
 										<th>Golongan Obat</th>
 										<th>Bentuk Obat</th>
 										<th>Depo Farmasi</th>
-										<th><i class="fa fa-gears"></i></th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									$no = 1;
-									foreach($obat as $key=>$value):
-									?>
-									<tr>
-										<td><?= $no ?></td>
-										<td><?= $value['obat_kode'] ?></td>
-										<td><?= $value['obat_nama'] ?></td>
-										<td><?= $value['obat_golongan'] ?></td>
-										<td><?= $value['obat_bentuk'] ?></td>
-										<td><?= $value['obat_depo'] ?></td>
-										<td>
-											<a href="<?= base_url('hapus/'.$value['obat_id']) ?>" title="Hapus" onclick="return confirm('Hapus Data ?')" class="btn btn-sm btn-danger">
-												<i class="fa fa-trash"></i>
-											</a>
-										</td>
-									</tr>
-									<?php
-									$no++;
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_2">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped" style="width: 100%"  id="dt-excel-produsen">
 									<thead class="text-center">
 									<tr>
 										<th>No</th>
 										<th>Nama Produsen</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									$no = 1;
-									foreach($produsen as $key=>$value):
-										?>
-										<tr>
-											<td><?= $no ?></td>
-											<td><?= $value['produsen_nama'] ?></td>
-										</tr>
-										<?php
-										$no++;
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_3">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped" style="width: 100%"  id="dt-excel-ruang">
 									<thead class="text-center">
 									<tr>
 										<th>No</th>
@@ -101,26 +63,11 @@
 										<th>Jenis Masuk</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									$no = 1;
-									foreach($ruang as $key=>$value):
-										?>
-										<tr>
-											<td><?= $no ?></td>
-											<td><?= $value['ruang_poliklinik'] ?></td>
-											<td><?= $value['ruang_jenis_masuk'] ?></td>
-										</tr>
-										<?php
-										$no++;
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_4">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped" style="width: 100%"  id="dt-excel-pasien">
 									<thead class="text-center">
 									<tr>
 										<th>No</th>
@@ -129,52 +76,22 @@
 										<th>Umur</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									$no = 1;
-									foreach($pasien as $key=>$value):
-										?>
-										<tr>
-											<td><?= $no ?></td>
-											<td><?= $value['pasien_nama'] ?></td>
-											<td><?= $value['pasien_jenis_kelamin'] ?></td>
-											<td><?= $value['pasien_umur'] ?></td>
-										</tr>
-										<?php
-										$no++;
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_5">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped" style="width: 100%"  id="dt-excel-dokter">
 									<thead class="text-center">
 									<tr>
 										<th>No</th>
 										<th>Nama Dokter</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									$no = 1;
-									foreach($dokter as $key=>$value):
-										?>
-										<tr>
-											<td><?= $no ?></td>
-											<td><?= $value['dokter_nama'] ?></td>
-											</tr>
-										<?php
-										$no++;
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_6">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped" style="width: 100%" id="dt-excel-transaksi">
 									<thead class="text-center">
 									<tr>
 										<th>No</th>
@@ -185,24 +102,6 @@
 										<th>Tanggal</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									$no = 1;
-									foreach($transaksi as $key=>$value):
-										?>
-										<tr>
-											<td><?= $no ?></td>
-											<td><?= $value['transaksi_kelompok'] ?></td>
-											<td><?= $value['transaksi_harga'] ?></td>
-											<td><?= $value['transaksi_jumlah'] ?></td>
-											<td><?= $value['transaksi_cara_bayar'] ?></td>
-											<td><?= $value['transaksi_tanggal'] ?></td>
-											</tr>
-										<?php
-										$no++;
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->

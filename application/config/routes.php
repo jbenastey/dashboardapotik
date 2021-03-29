@@ -95,3 +95,12 @@ $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';
 
 $route['grafik'] = 'welcome/grafik';
+
+$route['data-fakta'] = 'DataController/fakta';
+
+$route['data-excel-dokter'] = 'DataController/excelDokter';
+$route['data-excel-obat'] = 'DataController/excelObat';
+$route['data-excel-pasien'] = 'DataController/excelPasien';
+$route['data-excel-produsen'] = 'DataController/excelProdusen';
+$route['data-excel-ruang'] = 'DataController/excelRuang';
+$route['data-excel-transaksi'] = 'DataController/excelTransaksi';

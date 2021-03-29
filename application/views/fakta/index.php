@@ -18,7 +18,7 @@
 						<a href="<?= base_url('refresh_fakta') ?>" class="btn btn-outline-primary btn-sm float-right"><i class="fa fa-refresh"></i> Refresh</a>
 					</div><!-- /.card-header -->
 					<div class="card-body">
-						<table class="table table-bordered example1">
+						<table class="table table-bordered example1" id="dt-fakta">
 							<thead>
 							<tr>
 								<th>id_obat</th>
@@ -30,23 +30,6 @@
 								<th>id_waktu</th>
 							</tr>
 							</thead>
-							<tbody>
-							<?php
-							foreach($fakta as $key=>$value):
-							?>
-							<tr>
-								<td><?= $value['id_obat'] ?></td>
-								<td><?= $value['id_produsen'] ?></td>
-								<td><?= $value['id_ruang'] ?></td>
-								<td><?= $value['id_pasien'] ?></td>
-								<td><?= $value['id_dokter'] ?></td>
-								<td><?= $value['id_transaksi'] ?></td>
-								<td><?= $value['id_waktu'] ?></td>
-							</tr>
-							<?php
-							endforeach;
-							?>
-							</tbody>
 						</table>
 						<!-- /.tab-content -->
 					</div><!-- /.card-body -->

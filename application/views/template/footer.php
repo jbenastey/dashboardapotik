@@ -36,6 +36,7 @@
 <script src="<?= base_url ('assets/plugins/datatables/dataTables.bootstrap4.min.js') ?>"></script>
 <!--<script src="--><?//= base_url ('assets/js/grafik/obat.js') ?><!--"></script>-->
 <script src="<?= base_url ('assets/js/grafik/transaksi.js') ?>"></script>
+<script src="<?= base_url ('assets/js/pagination/pagination.js') ?>"></script>
 <script>
 	$(function () {
 		$('table.example1').DataTable();
