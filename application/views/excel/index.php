@@ -23,7 +23,14 @@
 							<li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab">Pasien</a></li>
 							<li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab">Dokter</a></li>
 							<li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab">Transaksi</a></li>
-							<li class="nav-item"><a class="nav-link btn btn-danger text-white btn-sm" href="<?= base_url('hapus-semua') ?>" onclick="return confirm('Hapus semua data?')">Hapus Semua Data</a></li>
+							<li class="nav-item"><a class="nav-link btn-danger text-white btn-sm" href="<?= base_url('hapus-semua') ?>" onclick="return confirm('Hapus semua data?')">Hapus Semua Data</a></li>
+							<li class="nav-item">
+								<button type="button" class="btn btn-outline-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								</button>
+								<div class="dropdown-menu">
+									<button type="button" class="dropdown-item btn btn-sm" data-toggle="modal" data-target="#hapus-bulan">Hapus Data Perbulan</button>
+								</div>
+							</li>
 						</ul>
 					</div><!-- /.card-header -->
 					<div class="card-body">
@@ -112,3 +119,36 @@
 		</div>
 	</div>
 </section>
+
+<div class="modal fade text-left" id="hapus-bulan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel1">Hapus Data Perbulan</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"><i class="ft-x font-medium-2 text-bold-700"></i></span>
+				</button>
+			</div>
+			<form action="<?= base_url('hapus-bulan') ?>" enctype="multipart/form-data" method="post">
+				<div class="modal-body">
+					<fieldset class="form-group">
+						<label for="basicInput">Pilih Bulan</label><br>
+						<select name="bulan" class="form-control">
+							<?php
+							foreach($getHapus as $key=>$value):
+							?>
+								<option value="<?= $value['waktu_bulan'] ?>-<?= $value['waktu_tahun'] ?>">Bulan <?= $value['waktu_bulan'] ?>, Tahun <?= $value['waktu_tahun'] ?></option>
+							<?php
+							endforeach;
+							?>
+						</select>
+					</fieldset>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn bg-light-secondary" data-dismiss="modal">Tutup</button>
+					<button type="submit" onclick="return confirm('Hapus Data? ')" class="btn btn-primary">Hapus</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -200,6 +200,7 @@ class ProsesController extends CI_Controller
 			'ruang' => $this->proses->lihat('excel_ruang'),
 			'transaksi' => $this->proses->lihat('excel_transaksi'),
 		);
+		$data['getHapus'] = $this->proses->getHapus();
 		$this->load->view('template/header');
 		$this->load->view('excel/index', $data);
 		$this->load->view('template/footer');
@@ -860,6 +861,38 @@ class ProsesController extends CI_Controller
 		$this->proses->hapus_semua('dim_transaksi');
 		$this->proses->hapus_semua('dim_waktu');
 		$this->proses->hapus_semua('fact_penjualan');
+		redirect('mentah');
+	}
+
+	public function hapusBulan(){
+		$input = $this->input->post('bulan');
+		$input = explode('-',$input);
+		$bulan = $input[0];
+		$tahun = $input[1];
+
+		$transaksi = $this->proses->transaksi_bulan_hapus($tahun,$bulan);
+//		echo "<pre>";
+
+		foreach ($transaksi as $key=>$value) {
+			$this->proses->hapus('excel_obat',$value['obat_id'],'obat_id');
+			$this->proses->hapus('excel_dokter',$value['dokter_id'],'dokter_id');
+			$this->proses->hapus('excel_pasien',$value['pasien_id'],'pasien_id');
+			$this->proses->hapus('excel_produsen',$value['produsen_id'],'produsen_id');
+			$this->proses->hapus('excel_ruang',$value['ruang_id'],'ruang_id');
+			$this->proses->hapus('excel_transaksi',$value['transaksi_id'],'transaksi_id');
+			$this->proses->hapus('dim_obat',$value['obat_id'],'obat_id');
+			$this->proses->hapus('dim_dokter',$value['dokter_id'],'dokter_id');
+			$this->proses->hapus('dim_pasien',$value['pasien_id'],'pasien_id');
+			$this->proses->hapus('dim_produsen',$value['produsen_id'],'produsen_id');
+			$this->proses->hapus('dim_ruang',$value['ruang_id'],'ruang_id');
+			$this->proses->hapus('dim_transaksi',$value['transaksi_id'],'transaksi_id');
+			$this->proses->hapus('dim_waktu',$value['waktu_id'],'waktu_id');
+			$this->proses->hapus('fact_penjualan',$value['id_obat'],'id_obat');
+//			var_dump($value);
+		}
+//		var_dump(count($transaksi));die();
+//		echo "</pre>";
+
 		redirect('mentah');
 	}
 }

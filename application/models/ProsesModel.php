@@ -189,4 +189,54 @@ class ProsesModel extends CI_Model
 		$this->db->empty_table($table);
 	}
 
+	public function getHapus(){
+		$this->db->select('waktu_bulan,waktu_tahun');
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
+		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
+		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
+		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
+		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->join('dim_waktu','dim_waktu.waktu_id = fact_penjualan.id_waktu');
+		$this->db->group_by("waktu_bulan");
+		$this->db->group_by("waktu_tahun");
+		$this->db->order_by("waktu_tahun","asc");
+		$this->db->order_by("waktu_bulan","asc");
+		$this->db->distinct();
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function transaksi_bulan_hapus($tahun,$bulan){
+		$this->db->select(
+			'obat_id,
+			dokter_id,
+			pasien_id,
+			produsen_id,
+			ruang_id,
+			transaksi_id,
+			obat_id,
+			dokter_id,
+			pasien_id,
+			produsen_id,
+			ruang_id,
+			transaksi_id,
+			waktu_id,
+			id_obat,
+			'
+		);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
+		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
+		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
+		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
+		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->join('dim_waktu','dim_waktu.waktu_id = fact_penjualan.id_waktu');
+		$this->db->like('waktu_tahun',$tahun);
+		$this->db->like('waktu_bulan',$bulan);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 }
