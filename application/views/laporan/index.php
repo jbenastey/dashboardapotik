@@ -18,7 +18,7 @@
 						<button type="button" class="btn btn-outline-primary btn-sm" style="float: left;" onclick="fnExcelReport()"> <i class="fa fa-file-excel-o"></i> Excel</button>
 					</div><!-- /.card-header -->
 					<div class="card-body">
-						<table class="table table-bordered example2 table-responsive" id="cetak">
+						<table class="table table-bordered table-responsive" style="width: 100%" id="cetak">
 							<thead>
 							<tr>
 								<th>Kode Obat</th>
@@ -41,34 +41,6 @@
 								<th>Tanggal</th>
 							</tr>
 							</thead>
-							<tbody>
-							<?php
-							foreach($laporan as $key=>$value):
-								?>
-								<tr>
-									<td><?= $value['obat_kode'] ?></td>
-									<td><?= $value['obat_nama'] ?></td>
-									<td><?= $value['obat_golongan'] ?></td>
-									<td><?= $value['obat_bentuk'] ?></td>
-									<td><?= $value['obat_depo'] ?></td>
-									<td><?= $value['produsen_nama'] ?></td>
-									<td><?= $value['pasien_nama'] ?></td>
-									<td><?= $value['pasien_jenis_kelamin'] ?></td>
-									<td><?= $value['pasien_umur'] ?></td>
-									<td><?= $value['ruang_poliklinik'] ?></td>
-									<td><?= $value['ruang_jenis_masuk'] ?></td>
-									<td><?= $value['dokter_nama'] ?></td>
-									<td><?= $value['transaksi_kelompok'] ?></td>
-									<td><?= $value['transaksi_harga'] ?></td>
-									<td><?= $value['transaksi_jumlah'] ?></td>
-									<td><?= $value['transaksi_total'] ?></td>
-									<td><?= $value['transaksi_cara_bayar'] ?></td>
-									<td><?= $value['transaksi_tanggal'] ?></td>
-								</tr>
-							<?php
-							endforeach;
-							?>
-							</tbody>
 						</table>
 						<!-- /.tab-content -->
 					</div><!-- /.card-body -->

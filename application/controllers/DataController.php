@@ -156,4 +156,14 @@ class DataController extends CI_Controller
 
 		echo json_encode($data);
 	}
+	public function laporan(){
+
+		// POST data
+		$postData = $this->input->post();
+
+		// Get data
+		$data = $this->DataModel->getLaporan($postData);
+
+		echo json_encode($data);
+	}
 }

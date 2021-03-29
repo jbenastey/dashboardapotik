@@ -187,4 +187,33 @@ $(document).ready(function(){
 			{ data: 'transaksi_total' },
 		]
 	});
+
+	$('#cetak').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-laporan'
+		},
+		'columns': [
+			{ data: 'obat_kode' },
+			{ data: 'obat_nama' },
+			{ data: 'obat_golongan' },
+			{ data: 'obat_bentuk' },
+			{ data: 'obat_depo' },
+			{ data: 'produsen_nama' },
+			{ data: 'pasien_nama' },
+			{ data: 'pasien_jenis_kelamin' },
+			{ data: 'pasien_umur' },
+			{ data: 'ruang_poliklinik' },
+			{ data: 'ruang_jenis_masuk' },
+			{ data: 'dokter_nama' },
+			{ data: 'transaksi_kelompok' },
+			{ data: 'transaksi_harga' },
+			{ data: 'transaksi_jumlah' },
+			{ data: 'transaksi_total' },
+			{ data: 'transaksi_cara_bayar' },
+			{ data: 'transaksi_tanggal' },
+		]
+	});
 });

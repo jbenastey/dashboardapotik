@@ -112,3 +112,5 @@ $route['data-dimensi-produsen'] = 'DataController/dimensiProdusen';
 $route['data-dimensi-ruang'] = 'DataController/dimensiRuang';
 $route['data-dimensi-transaksi'] = 'DataController/dimensiTransaksi';
 $route['data-dimensi-waktu'] = 'DataController/dimensiWaktu';
+
+$route['data-laporan'] = 'DataController/laporan';

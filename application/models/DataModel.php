@@ -830,14 +830,14 @@ class DataModel extends CI_Model
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('dim_transaksi')->result();
+		$records = $this->db->get('dim_waktu')->result();
 		$totalRecords = $records[0]->allcount;
 
 		## Total number of record with filtering
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$records = $this->db->get('dim_transaksi')->result();
+		$records = $this->db->get('dim_waktu')->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
 		## Fetch records
@@ -846,7 +846,7 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('dim_transaksi')->result();
+		$records = $this->db->get('dim_waktu')->result();
 
 		$data = array();
 
@@ -860,6 +860,130 @@ class DataModel extends CI_Model
 				"waktu_tahun"=>$record->waktu_tahun,
 			);
 		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getLaporan($postData=null){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (
+			obat_kode like '%".$searchValue."%' or 
+			obat_nama like'%".$searchValue."%' or 
+			obat_golongan like'%".$searchValue."%' or 
+			obat_bentuk like'%".$searchValue."%' or 
+			obat_depo like'%".$searchValue."%' or 
+			produsen_nama like'%".$searchValue."%' or 
+			pasien_nama like'%".$searchValue."%' or 
+			pasien_jenis_kelamin like'%".$searchValue."%' or 
+			pasien_umur like'%".$searchValue."%' or 
+			ruang_poliklinik like'%".$searchValue."%' or 
+			ruang_jenis_masuk like'%".$searchValue."%' or 
+			dokter_nama like'%".$searchValue."%' or 
+			transaksi_kelompok like'%".$searchValue."%' or 
+			transaksi_harga like'%".$searchValue."%' or 
+			transaksi_jumlah like'%".$searchValue."%' or 
+			transaksi_total like'%".$searchValue."%' or 
+			transaksi_cara_bayar like'%".$searchValue."%' or 
+			transaksi_tanggal like'%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
+		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
+		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
+		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
+		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->join('dim_waktu','dim_waktu.waktu_id = fact_penjualan.id_waktu');
+		$this->db->join('dim_transaksi','dim_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$records = $this->db->get()->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
+		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
+		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
+		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
+		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->join('dim_waktu','dim_waktu.waktu_id = fact_penjualan.id_waktu');
+		$this->db->join('dim_transaksi','dim_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$records = $this->db->get()->result();
+
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
+		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
+		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
+		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
+		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->join('dim_waktu','dim_waktu.waktu_id = fact_penjualan.id_waktu');
+		$this->db->join('dim_transaksi','dim_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$records = $this->db->get()->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"obat_kode"=>$record->obat_kode,
+				"obat_nama"=>$record->obat_nama,
+				"obat_golongan"=>$record->obat_golongan,
+				"obat_bentuk"=>$record->obat_bentuk,
+				"obat_depo"=>$record->obat_depo,
+				"produsen_nama"=>$record->produsen_nama,
+				"pasien_nama"=>$record->pasien_nama,
+				"pasien_jenis_kelamin"=>$record->pasien_jenis_kelamin,
+				"pasien_umur"=>$record->pasien_umur,
+				"ruang_poliklinik"=>$record->ruang_poliklinik,
+				"ruang_jenis_masuk"=>$record->ruang_jenis_masuk,
+				"dokter_nama"=>$record->dokter_nama,
+				"transaksi_kelompok"=>$record->transaksi_kelompok,
+				"transaksi_harga"=>$record->transaksi_harga,
+				"transaksi_jumlah"=>$record->transaksi_jumlah,
+				"transaksi_total"=>$record->transaksi_total,
+				"transaksi_cara_bayar"=>$record->transaksi_cara_bayar,
+				"transaksi_tanggal"=>$record->transaksi_tanggal,
+			);
+		}
+
+
 
 		## Response
 		$response = array(
