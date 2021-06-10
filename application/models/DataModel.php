@@ -428,7 +428,442 @@ class DataModel extends CI_Model
 			$data[] = array(
 				"transaksi_id"=>$record->transaksi_id,
 				"transaksi_kelompok"=>$record->transaksi_kelompok,
-				"transaksi_harga"=>$record->transaksi_harga,
+				"transaksi_harga"=>'Rp. '.$record->transaksi_harga,
+				"transaksi_jumlah"=>$record->transaksi_jumlah,
+				"transaksi_cara_bayar"=>$record->transaksi_cara_bayar,
+				"transaksi_tanggal"=>$record->transaksi_tanggal,
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getExcelBulanDokter($postData=null,$tanggal){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (dokter_id like '%".$searchValue."%' or dokter_nama like '%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"dokter_id"=>$record->dokter_id,
+				"dokter_nama"=>$record->dokter_nama,
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getExcelBulanObat($postData=null,$tanggal){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (obat_id like '%".$searchValue."%' or obat_kode like '%".$searchValue."%' or obat_nama like'%".$searchValue."%' or obat_golongan like'%".$searchValue."%' or obat_bentuk like'%".$searchValue."%' or obat_depo like'%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+
+		$data = array();
+
+		$bulan = str_replace('/','-',$tanggal);
+		foreach($records as $record ){
+
+			$data[] = array(
+				"obat_id"=>$record->obat_id,
+				"obat_kode"=>$record->obat_kode,
+				"obat_nama"=>$record->obat_nama,
+				"obat_golongan"=>$record->obat_golongan,
+				"obat_bentuk"=>$record->obat_bentuk,
+				"obat_depo"=>$record->obat_depo,
+				"aksi"=>'<a href="'.base_url('hapus/'.$bulan.'/'.$record->obat_id).'" class="btn btn-sm btn-danger" title="Hapus Data ?"><i class="fa fa-trash"></i></a>',
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getExcelBulanPasien($postData=null,$tanggal){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (pasien_id like '%".$searchValue."%' or pasien_nama like '%".$searchValue."%' or pasien_jenis_kelamin like'%".$searchValue."%' or pasien_umur like'%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"pasien_id"=>$record->pasien_id,
+				"pasien_nama"=>$record->pasien_nama,
+				"pasien_jenis_kelamin"=>$record->pasien_jenis_kelamin,
+				"pasien_umur"=>$record->pasien_umur,
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getExcelBulanProdusen($postData=null,$tanggal){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (produsen_id like '%".$searchValue."%' or produsen_nama like '%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$records = $this->db->get('excel_produsen')->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"produsen_id"=>$record->produsen_id,
+				"produsen_nama"=>$record->produsen_nama,
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getExcelBulanRuang($postData=null,$tanggal){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (ruang_id like '%".$searchValue."%' or ruang_poliklinik like '%".$searchValue."%' or ruang_jenis_masuk like'%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"ruang_id"=>$record->ruang_id,
+				"ruang_poliklinik"=>$record->ruang_poliklinik,
+				"ruang_jenis_masuk"=>$record->ruang_jenis_masuk,
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return $response;
+	}
+
+	function getExcelBulanTransaksi($postData=null,$tanggal){
+
+		$response = array();
+
+		## Read value
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		## Search
+		$searchQuery = "";
+		if($searchValue != ''){
+			$searchQuery = " (transaksi_id like '%".$searchValue."%' or transaksi_kelompok like '%".$searchValue."%' or transaksi_harga like'%".$searchValue."%' or transaksi_jumlah like'%".$searchValue."%' or transaksi_cara_bayar like'%".$searchValue."%' or transaksi_tanggal like'%".$searchValue."%') ";
+		}
+
+		## Total number of records without filtering
+		$this->db->select('count(*) as allcount');
+		$this->db->from('excel_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+		$totalRecords = $records[0]->allcount;
+
+		## Total number of record with filtering
+		$this->db->select('count(*) as allcount');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->from('excel_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+		$totalRecordwithFilter = $records[0]->allcount;
+
+		## Fetch records
+		$this->db->select('*');
+		if($searchQuery != '')
+			$this->db->where($searchQuery);
+		$this->db->order_by($columnName, $columnSortOrder);
+		$this->db->limit($rowperpage, $start);
+		$this->db->from('excel_transaksi');
+		$this->db->like('transaksi_tanggal',$tanggal);
+		$records = $this->db->get()->result();
+
+		$data = array();
+
+		foreach($records as $record ){
+
+			$data[] = array(
+				"transaksi_id"=>$record->transaksi_id,
+				"transaksi_kelompok"=>$record->transaksi_kelompok,
+				"transaksi_harga"=>'Rp. '.$record->transaksi_harga,
 				"transaksi_jumlah"=>$record->transaksi_jumlah,
 				"transaksi_cara_bayar"=>$record->transaksi_cara_bayar,
 				"transaksi_tanggal"=>$record->transaksi_tanggal,

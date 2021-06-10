@@ -239,4 +239,41 @@ class ProsesModel extends CI_Model
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+
+	public function laporan_bulan($tahun,$bulan){
+		$this->db->select(
+			'*'
+//			'obat_kode,
+//			obat_nama,
+//			obat_golongan,
+//			obat_bentuk,
+//			obat_depo,
+//			produsen_nama,
+//			pasien_nama,
+//			pasien_jenis_kelamin,
+//			pasien_umur,
+//			ruang_poliklinik,
+//			ruang_jenis_masuk,
+//			dokter_nama,
+//			transaksi_kelompok,
+//			transaksi_harga,
+//			transaksi_jumlah,
+//			transaksi_total,
+//			transaksi_cara_bayar,
+//			transaksi_tanggal,'
+		);
+		$this->db->from('fact_penjualan');
+		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
+		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
+		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
+		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
+		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
+		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->join('dim_transaksi','dim_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->join('dim_waktu','dim_waktu.waktu_id = fact_penjualan.id_waktu');
+		$this->db->like('waktu_tahun',$tahun);
+		$this->db->like('waktu_bulan',$bulan);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 }

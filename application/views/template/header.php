@@ -87,11 +87,28 @@ to get the desired effect
 					<p class="text">Beranda</p>
 				</a>
 			</li>
-			<li class="nav-item">
-				<a href="<?=base_url('mentah')?>" class="nav-link <?php if ($this->uri->segment(1) == 'mentah') echo 'active'?>">
+			<li class="nav-item has-treeview <?php if ($this->uri->segment('1') == 'mentah') echo 'menu-open'?>">
+				<a href="#" class="nav-link">
 					<i class="nav-icon fa fa-file-excel-o"></i>
-					<p class="text">Data Excel</p>
+					<p>
+						Data Excel
+						<i class="right fa fa-angle-left"></i>
+					</p>
 				</a>
+				<ul class="nav nav-treeview">
+					<li class="nav-item">
+						<a href="<?=base_url('mentah')?>" class="nav-link <?php if ($this->uri->segment('1') == 'mentah') echo 'active'?>">
+							<i class="fa fa-circle-o nav-icon"></i>
+							<p>Semua Data</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?=base_url('pilih-bulan')?>" class="nav-link">
+							<i class="fa fa-circle-o nav-icon"></i>
+							<p>Data Perbulan</p>
+						</a>
+					</li>
+				</ul>
 			</li>
 			<li class="nav-item">
 				<a href="<?=base_url('dimensi')?>" class="nav-link <?php if ($this->uri->segment('1') == 'dimensi') echo 'active'?>">
@@ -106,10 +123,27 @@ to get the desired effect
 				</a>
 			</li>
 			<li class="nav-item">
-				<a href="<?=base_url('laporan')?>" class="nav-link <?php if ($this->uri->segment('1') == 'laporan') echo 'active'?>">
+				<a href="#" class="nav-link">
 					<i class="nav-icon fa fa-files-o"></i>
-					<p>Laporan</p>
+					<p>
+						Laporan
+						<i class="right fa fa-angle-left"></i>
+					</p>
 				</a>
+				<ul class="nav nav-treeview">
+					<li class="nav-item">
+						<a href="<?=base_url('laporan')?>" class="nav-link <?php if ($this->uri->segment('1') == 'laporan') echo 'active'?>">
+							<i class="fa fa-circle-o nav-icon"></i>
+							<p>Semua Data</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?=base_url('pilih-laporan-bulan')?>" class="nav-link">
+							<i class="fa fa-circle-o nav-icon"></i>
+							<p>Data Perbulan</p>
+						</a>
+					</li>
+				</ul>
 			</li>
 			<li class="nav-item">
 				<a href="<?=base_url('grafik')?>" class="nav-link <?php if ($this->uri->segment('1') == 'grafik') echo 'active'?>">

@@ -166,4 +166,82 @@ class DataController extends CI_Controller
 
 		echo json_encode($data);
 	}
+
+	public function excelBulan(){
+		$data['getHapus'] = $this->proses->getHapus();
+		$this->load->view('template/header');
+		$this->load->view('excel/pilih_bulan',$data);
+		$this->load->view('template/footer');
+	}
+
+	public function lihatExcelPerbulan($tanggal){
+		$data['bulan'] = $tanggal;
+		$this->load->view('template/header');
+		$this->load->view('excel/index_bulan',$data);
+		$this->load->view('template/footer');
+	}
+
+	public function excelBulanDokter($tanggal){
+
+		// POST data
+		$postData = $this->input->post();
+		$bulan = str_replace('-','/',$tanggal);
+
+		// Get data
+		$data = $this->DataModel->getExcelBulanDokter($postData,$bulan);
+
+		echo json_encode($data);
+	}
+	public function excelBulanObat($tanggal){
+
+		// POST data
+		$postData = $this->input->post();
+		$bulan = str_replace('-','/',$tanggal);
+
+		// Get data
+		$data = $this->DataModel->getExcelBulanObat($postData,$bulan);
+
+		echo json_encode($data);
+	}
+	public function excelBulanPasien($tanggal){
+
+		// POST data
+		$postData = $this->input->post();
+		$bulan = str_replace('-','/',$tanggal);
+
+		// Get data
+		$data = $this->DataModel->getExcelBulanPasien($postData,$bulan);
+
+		echo json_encode($data);
+	}
+	public function excelBulanProdusen($tanggal){
+
+		// POST data
+		$postData = $this->input->post();
+		$bulan = str_replace('-','/',$tanggal);
+		// Get data
+		$data = $this->DataModel->getExcelBulanProdusen($postData,$bulan);
+
+		echo json_encode($data);
+	}
+	public function excelBulanRuang($tanggal){
+
+		// POST data
+		$postData = $this->input->post();
+		$bulan = str_replace('-','/',$tanggal);
+		// Get data
+		$data = $this->DataModel->getExcelBulanRuang($postData,$bulan);
+
+		echo json_encode($data);
+	}
+	public function excelBulanTransaksi($tanggal){
+
+		// POST data
+		$postData = $this->input->post();
+		$bulan = str_replace('-','/',$tanggal);
+		// Get data
+		$data = $this->DataModel->getExcelBulanTransaksi($postData,$bulan);
+
+		echo json_encode($data);
+	}
 }

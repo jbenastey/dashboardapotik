@@ -108,6 +108,98 @@ $(document).ready(function(){
 		]
 	});
 
+	var tanggal = $('#bulan').text();
+
+	$('#dt-excel-bulan-dokter').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-excel-bulan-dokter/' + tanggal
+		},
+		'columns': [
+			{ data: 'dokter_id' },
+			{ data: 'dokter_nama' },
+		]
+	});
+
+	$('#dt-excel-bulan-obat').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-excel-bulan-obat/' + tanggal
+		},
+		'columns': [
+			{ data: 'obat_id' },
+			{ data: 'obat_kode' },
+			{ data: 'obat_nama' },
+			{ data: 'obat_golongan' },
+			{ data: 'obat_bentuk' },
+			{ data: 'obat_depo' },
+			{ data: 'aksi' },
+		]
+	});
+
+	$('#dt-excel-bulan-pasien').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-excel-bulan-pasien/' + tanggal
+		},
+		'columns': [
+			{ data: 'pasien_id' },
+			{ data: 'pasien_nama' },
+			{ data: 'pasien_jenis_kelamin' },
+			{ data: 'pasien_umur' },
+		]
+	});
+
+	$('#dt-excel-bulan-produsen').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-excel-bulan-produsen/' + tanggal
+		},
+		'columns': [
+			{ data: 'produsen_id' },
+			{ data: 'produsen_nama' },
+		]
+	});
+
+	$('#dt-excel-bulan-ruang').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-excel-bulan-ruang/' + tanggal
+		},
+		'columns': [
+			{ data: 'ruang_id' },
+			{ data: 'ruang_poliklinik' },
+			{ data: 'ruang_jenis_masuk' },
+		]
+	});
+
+	$('#dt-excel-bulan-transaksi').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-excel-bulan-transaksi/' + tanggal
+		},
+		'columns': [
+			{ data: 'transaksi_id' },
+			{ data: 'transaksi_kelompok' },
+			{ data: 'transaksi_harga' },
+			{ data: 'transaksi_jumlah' },
+			{ data: 'transaksi_cara_bayar' },
+			{ data: 'transaksi_tanggal' },
+		]
+	});
+
 	$('#dt-dimensi-dokter').DataTable({
 		'processing': true,
 		'serverSide': true,
@@ -188,6 +280,22 @@ $(document).ready(function(){
 		]
 	});
 
+	$('#dt-dimensi-waktu').DataTable({
+		'processing': true,
+		'serverSide': true,
+		'serverMethod': 'post',
+		'ajax': {
+			'url': root + 'data-dimensi-waktu'
+		},
+		'columns': [
+			{ data: 'waktu_id' },
+			{ data: 'waktu_hari' },
+			{ data: 'waktu_tanggal' },
+			{ data: 'waktu_bulan' },
+			{ data: 'waktu_tahun' },
+		]
+	});
+
 	$('#cetak').DataTable({
 		'processing': true,
 		'serverSide': true,
@@ -216,4 +324,23 @@ $(document).ready(function(){
 			{ data: 'transaksi_tanggal' },
 		]
 	});
+
+	$('#pilih-bulan').change(function (){
+		var value = $(this).val();
+		if (value !== '- Pilih Bulan -'){
+			$('#submit-bulan').attr('href',root+'excel-bulan/'+value);
+		} else {
+			$('#submit-bulan').attr('href','#');
+		}
+	})
+
+	$('#pilih-laporan-bulan').change(function (){
+		var value = $(this).val();
+		if (value !== '- Pilih Bulan -'){
+			$('#submit-laporan-bulan').attr('href',root+'laporan-bulan/'+value);
+		} else {
+			$('#submit-laporan-bulan').attr('href','#');
+		}
+	})
+
 });

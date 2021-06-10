@@ -3,6 +3,7 @@
 require FCPATH . 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Reader;
+use Dompdf\Dompdf;
 
 
 class ProsesController extends CI_Controller
@@ -820,7 +821,7 @@ class ProsesController extends CI_Controller
 		echo json_encode($data);
 	}
 
-	public function hapus($id){
+	public function hapus($bulan,$id){
 
 		$excel = $this->proses->lihat('excel_obat');
 		$dimensi = $this->proses->lihat('dim_obat');
@@ -840,9 +841,9 @@ class ProsesController extends CI_Controller
 			$this->proses->hapus('dim_transaksi',$id,'transaksi_id');
 			$this->proses->hapus('dim_waktu',$id,'waktu_id');
 			$this->proses->hapus('fact_penjualan',$id,'id_obat');
-			redirect('mentah');
+			redirect('excel-bulan/'.$bulan);
 		} else {
-			redirect('mentah');
+			redirect('excel-bulan/'.$bulan);
 		}
 	}
 
@@ -894,5 +895,36 @@ class ProsesController extends CI_Controller
 //		echo "</pre>";
 
 		redirect('mentah');
+	}
+
+	function pilihLaporanBulan(){
+		$data['getHapus'] = $this->proses->getHapus();
+		$this->load->view('template/header');
+		$this->load->view('laporan/pilih_bulan',$data);
+		$this->load->view('template/footer');
+	}
+
+	function laporanBulan($tanggal){
+		$data['bulan'] = $tanggal;
+		$tgl = explode('-',$tanggal);
+//		var_dump($tgl);die();
+		$data['laporan'] = $this->proses->laporan_bulan($tgl[1],$tgl[0]);
+//		echo "<pre>";
+//		print_r ($data['laporan']);
+//		echo "</pre>";die();
+
+//		ini_set('memory_limit','128M');
+//
+//		$this->load->library('pdf');
+//
+//		$this->pdf->setPaper('A4', 'landscape');
+//		$this->pdf->filename = "laporan.pdf";
+//		$this->pdf->load_view('laporan/cetak', $data);
+		$this->load->view('template/header');
+		$this->load->view('laporan/cetak', $data);
+		$this->load->view('template/footer');
+	}
+
+	function cetakLaporan(){
 	}
 }

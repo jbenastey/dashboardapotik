@@ -88,7 +88,7 @@ $route['grafik-tahun'] = 'ProsesController/grafik_tahun';
 $route['data-grafik/(:any)/(:any)'] = 'ProsesController/datagrafik/$1/$2';
 $route['grafik-kategori/(:any)/(:any)/(:any)'] = 'ProsesController/grafik_kategori/$1/$2/$3';
 $route['grafik-bulan/(:any)'] = 'ProsesController/grafik_bulan/$1';
-$route['hapus/(:any)'] = 'ProsesController/hapus/$1';
+$route['hapus/(:any)/(:any)'] = 'ProsesController/hapus/$1/$2';
 $route['hapus-semua'] = 'ProsesController/hapusSemua';
 
 $route['login'] = 'AuthController/login';
@@ -116,3 +116,17 @@ $route['data-dimensi-waktu'] = 'DataController/dimensiWaktu';
 $route['data-laporan'] = 'DataController/laporan';
 
 $route['hapus-bulan'] = 'ProsesController/hapusBulan';
+
+$route['pilih-bulan'] = 'DataController/excelBulan';
+$route['excel-bulan/(:any)'] = 'DataController/lihatExcelPerbulan/$1';
+
+$route['data-excel-bulan-dokter/(:any)'] = 'DataController/excelBulanDokter/$1';
+$route['data-excel-bulan-obat/(:any)'] = 'DataController/excelBulanObat/$1';
+$route['data-excel-bulan-pasien/(:any)'] = 'DataController/excelBulanPasien/$1';
+$route['data-excel-bulan-produsen/(:any)'] = 'DataController/excelBulanProdusen/$1';
+$route['data-excel-bulan-ruang/(:any)'] = 'DataController/excelBulanRuang/$1';
+$route['data-excel-bulan-transaksi/(:any)'] = 'DataController/excelBulanTransaksi/$1';
+
+$route['pilih-laporan-bulan'] = 'ProsesController/pilihLaporanBulan';
+$route['laporan-bulan/(:any)'] = 'ProsesController/laporanBulan/$1';
+$route['cetak-laporan'] = 'ProsesController/cetakLaporan';
