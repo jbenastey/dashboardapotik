@@ -3,7 +3,6 @@
 		<div class="row mb-2">
 			<div class="col-sm-6 col-lg-12">
 				<h1 class="m-0 text-dark">Beranda</h1>
-				<button type="button" onclick="window.print()" class="btn btn-sm btn-outline-primary float-right"><i class="fa fa-print"></i> Cetak</button>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
 	</div><!-- /.container-fluid -->

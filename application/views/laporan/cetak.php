@@ -50,7 +50,7 @@ function toBulan($tanggal){
 						   style="float: left;" onclick="window.print()"> <i class="fa fa-file-excel-o"></i> Cetak</button>
 					</div><!-- /.card-header -->
 					<div class="card-body">
-						<<div class="row">
+						<div class="row">
 							<div class="col-2 float-left ml-5 mt-1">
 								<img src="http://localhost/dashboardapotik/assets/img/logocetak.jpg" class="logo" width="205px">
 							</div>

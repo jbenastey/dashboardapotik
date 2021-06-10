@@ -1,3 +1,9 @@
+<style type="text/css" media="print">
+	@page { size: landscape; }
+	.cetak-grafik{
+		display: block;
+	}
+</style>
 <div class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
@@ -12,6 +18,39 @@
 <section class="content">
 	<div class="container-fluid">
 		<!-- Small boxes (Stat box) -->
+		<div class="cetak-grafik d-print-block" style="display: none">
+
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-2 float-left ml-5 mt-1">
+									<img src="http://localhost/dashboardapotik/assets/img/logocetak.jpg" class="logo" width="205px">
+								</div>
+								<div class="col-9 text-center p-0 ">
+									<h4 style="margin-left: -150px">Pemerintah Daerah Provinsi Riau</h4>
+									<h4 style="margin-left: -150px">Dinas Kesehatan</h4>
+									<h4 style="margin-left: -150px">Rumah Sakit Jiwa Tampan</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12 ml-3 mr-3 mb-0">
+									<p style="margin-top: -5px;margin-bottom: -5px;font-size: 9pt;" class="text-center">Jl. H.R Soebrantas KM. 12,5</p>
+									<p style="margin-top: -5px;margin-bottom: -5px;font-size: 9pt;" class="text-center">Website: www.rsjiwatampan.riau.go.id Email: rsjtampan@riau.go.id</p>
+									<p style="margin-top: -5px;font-size: 9pt;" class="text-center">Kota Pekanbaru</p>
+								</div>
+							</div>
+							<hr style=" margin-top: -10px;width: 100%;border:2px solid black;background-color: black; ">
+							<div class="col-12 text-center pb-2">
+								<h5>Grafik</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-lg-6 col-6">
 				<div class="small-box bg-warning-gradient">
